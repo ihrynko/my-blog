@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getBooks } from "../../service/api";
+
 import { StyledList, StyledItem, StyledLink } from "./styled";
 
 export default function BooksPage() {
@@ -15,7 +16,7 @@ export default function BooksPage() {
         {books.map((book) => {
           return (
             <StyledItem key={book.id}>
-              <StyledLink to={`books/${book.id}`}>{book.title}</StyledLink>
+              <StyledLink to={`/books/${book.id}`}>{book.title}</StyledLink>
               <p>Description: {book.description.slice(0, 200)}</p>
               <p>
                 Create Date: {new Date(book.publishDate).toLocaleDateString()}
