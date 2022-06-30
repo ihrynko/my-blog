@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { getBookItem } from "../../service/api";
 import { Outlet } from "react-router-dom";
 
 export default function BookItemPage() {
   const { id } = useParams();
   const [book, setBook] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     getBookItem(id).then(setBook);
@@ -14,6 +15,7 @@ export default function BookItemPage() {
   const date = book.publishDate.toLocalString();
   return (
     <>
+      <button to={location?.state?.from ?? "/books"}>Go back</button>
       {book && (
         <div>
           <h1>{book.title}</h1>

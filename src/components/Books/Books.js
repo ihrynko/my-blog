@@ -1,84 +1,30 @@
 import { useEffect, useState } from "react";
-import { getBooks } from "../../service/api";
 import { Link } from "react-router-dom";
+import { getBooks } from "../../service/api";
+import { StyledList, StyledItem, StyledLink } from "./styled";
 
-import React from "react";
-import BookItem from "../BookItem/BookItem";
-// import Loader from "../../../components/Loader";
-import { Row, CardDeck } from "reactstrap";
+export default function BooksPage() {
+  const [books, setBooks] = useState([]);
 
-class BookList extends React.Component {
-  state = {
-    data: [],
-    loading: false,
-  };
+  useEffect(() => {
+    getBooks().then(setBooks);
+  }, []);
 
-  toggleLoading = () => {
-    this.setState(({ loading }) => ({ loading: !loading }));
-  };
-  componentDidMount() {
-    getBooks()
-      .then((response) =>
-        this.setState(
-          {
-            [data: ...response.data],
-            isLoading: false,
-          }
-        )
-      ).catch (error) {
-      console.error(error);
-    } 
-  };
-  componentDidMount() {
-    getBooks()
-      .then((response) =>
-        this.setState(
-          {
-            data: response.data,
-            isLoading: false,
-          },
-          () => {
-            console.log(this.state.data);
-          }
-        )
-      )
-      .catch((rej) => {
-        console.log("Error in parsing module", rej);
-        this.setState({ isError: true });
-      });
-  }
-  paginationHandler = (number) => {
-    this.setState({
-      currentPageNumber: number,
-    });
-  };
-
-  render() {
-    const { isLoading, data } = this.state;
-    const indexOfLastPost = this.state.currentPageNumber * POSTS_PER_PAGE;
-    const indexOfFirstPost = indexOfLastPost - POSTS_PER_PAGE;
-    const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
-
-    return (
-      <div className="list-container">
-        {!isLoading && (
-          <CardDeck>
-            <Row>
-              {currentPosts.map((item, index) => (
-                <BookItem
-                  title={item.title}
-                  description={item.description}
-                  id={item.id}
-                  key={index}
-                />
-              ))}
-            </Row>
-          </CardDeck>
-        )}
-        {isLoading && <Loader />}
-      </div>
-    );
-  }
+  return (
+    <>
+      <StyledList>
+        {books.map((book) => {
+          return (
+            <StyledItem key={book.id}>
+              <StyledLink to={`books/${book.id}`}>{book.title}</StyledLink>
+              <p>Description: {book.description.slice(0, 200)}</p>
+              <p>
+                Create Date: {new Date(book.publishDate).toLocaleDateString()}
+              </p>
+            </StyledItem>
+          );
+        })}
+      </StyledList>
+    </>
+  );
 }
-
-export default BookList;
