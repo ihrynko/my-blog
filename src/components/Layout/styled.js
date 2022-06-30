@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import { Nav, NavItem } from "reactstrap";
+import { Nav } from "reactstrap";
 
 export const StyledNav = styled(Nav)`
   justify-content: end;
@@ -23,5 +23,8 @@ export const StyledNavLink = styled(NavLink)`
     color: #ffffff;
     box-shadow: 7px 7px 10px 0px rgba(190, 245, 190, 1);
     text-shadow: #bef5be 4px 4px 3px;
+  }
+  &:hover {
+    color: green;
   }
 `;
