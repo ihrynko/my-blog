@@ -13,11 +13,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="books" element={<BooksPage />}>
-            <Route path=":id" element={<BookItemPage />} />
-          </Route>
+          <Route path="books" element={<BooksPage />} />
+          <Route path="books/:id" element={<BookItemPage />} />
           <Route path="statistics" element={<Statictics />} />
-          <Route path="*" element={<Layout />} />
+          <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
     </div>
