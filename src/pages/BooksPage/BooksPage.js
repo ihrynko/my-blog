@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getBooks } from "../../service/api";
+import { getBooks } from "../../api/books";
 
 import { StyledList, StyledItem, StyledLink } from "./styled";
 

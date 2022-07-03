@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { getBooks } from "../../service/api";
+import { getBooks } from "../../api/books";
 import StatisticsTable from "./Table";
 import { StyledContainer } from "./styled";
 

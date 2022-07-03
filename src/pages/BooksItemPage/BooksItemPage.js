@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getBookItem } from "../../service/api";
+import { getBookItem } from "../../api/books";
 import { StyledContainer } from "./styled";
 
 export default function BookItemPage() {
