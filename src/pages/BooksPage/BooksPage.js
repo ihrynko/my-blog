@@ -15,15 +15,16 @@ export default function BooksPage() {
       <StyledList>
         {books.map((book) => {
           return (
-            <StyledLink to={`/books/${book.id}`}>
-              <StyledItem key={book.id}>
-                <h3>{book.title}</h3>
-                <p>Description: {book.description.slice(0, 200)}</p>
-                <p>
-                  Create Date: {new Date(book.publishDate).toLocaleDateString()}
-                </p>
-              </StyledItem>
-            </StyledLink>
+            <StyledItem key={book.id}>
+              <h3>{book.title}</h3>
+              <p>Description: {book.description.slice(0, 200)}</p>
+              <p>
+                Create Date: {new Date(book.publishDate).toLocaleDateString()}
+              </p>
+              <StyledLink to={`/books/${book.id}`}>
+                <button>View more</button>
+              </StyledLink>
+            </StyledItem>
           );
         })}
       </StyledList>

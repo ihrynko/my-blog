@@ -8,9 +8,9 @@ export const getBooks = async () => {
   }
 };
 
-export const getBookItem = async (id) => {
+export const getBookItem = async (bookId) => {
   try {
-    return await client.get(`/Books/${id}`);
+    return await client.get(`/Books/${bookId}`);
   } catch (error) {
     return error;
   }

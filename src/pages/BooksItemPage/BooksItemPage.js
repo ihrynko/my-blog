@@ -4,12 +4,12 @@ import { getBookItem } from "../../api/books";
 import { StyledContainer } from "./styled";
 
 export default function BookItemPage() {
-  const { id } = useParams();
+  const { bookId } = useParams();
   const [book, setBook] = useState(null);
 
   useEffect(() => {
-    getBookItem(id).then(setBook);
-  }, [id]);
+    getBookItem(bookId).then(setBook);
+  }, [bookId]);
 
   return (
     <>
