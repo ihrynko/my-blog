@@ -1,10 +1,10 @@
+import moment from "moment";
 import { useEffect, useState, useMemo } from "react";
 import { getBooks } from "../../api/books";
-import moment from "moment";
 import StatisticsTable from "./Table";
 import { Spinner } from "reactstrap";
-import Notification from "../../components/Notification";
 import { StyledContainer } from "./styled";
+import Notification from "../../components/Notification";
 
 export default function StaticticsPage() {
   const [loading, setLoading] = useState(true);

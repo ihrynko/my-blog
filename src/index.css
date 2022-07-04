@@ -23,6 +23,7 @@ a {
 }
 
 body {
+  height: 100%;
   font-family: Roboto, sans-serif;
   color: #757575;
   background-color: #ffffff;

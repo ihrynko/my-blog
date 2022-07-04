@@ -1,19 +1,33 @@
 import styled from "@emotion/styled";
 
 export const StyledWrapper = styled.div`
-  max-width: 696px;
   text-align: center;
   margin: 0 auto;
-  padding: 20px;
+  height: 100%;
 `;
+
+export const StyledContainer = styled.div`
+  margin-top: 45px;
+`;
+
+export const StyledTitle = styled.h1`
+  font-size: 50px;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 110px;
+`;
+
 export const StyledImg = styled.img`
-  width: 350px;
+  max-width: 200px;
+  height: 30%;
+  width: 20%;
   border-radius: 100px;
-  border: 2px solid rgba(190, 245, 190, 1);
-  box-shadow: 7px 7px 10px 0px rgba(190, 245, 190, 1);
+  margin: 0 auto;
 `;
+
 export const StyledText = styled.p`
-  margin: 25px 0;
-  padding: 5px;
-  border: 1px solid #999;
+  max-width: 600px;
+  padding: 10px;
+  margin: 35px auto;
+  color: #ff6b08;
 `;

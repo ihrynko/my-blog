@@ -17,7 +17,7 @@ export default function Layout() {
       <div>
         <StyledHeader>
           <StyledLogo to="/">
-            My<StyledSpan class="logo__dark">Blog</StyledSpan>
+            My<StyledSpan>Blog</StyledSpan>
           </StyledLogo>
           <StyledNav>
             <StyledList>

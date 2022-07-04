@@ -9,7 +9,7 @@ export default function StatisticsTable({ columns, data }) {
       data,
     });
   return (
-    <Table {...getTableProps()} bordered>
+    <Table {...getTableProps()} bordered striped>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
