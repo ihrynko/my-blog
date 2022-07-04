@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 import { getBookItem } from "../../api/books";
 import Notification from "../../components/Notification";
 import { Spinner } from "reactstrap";
@@ -30,7 +31,7 @@ export default function BookItemPage() {
           <h2>Excerpt</h2>
           <p>{book.excerpt}</p>
           <h2>Day of publication</h2>
-          <p> {new Date(book.publishDate).toLocaleDateString()}</p>
+          <p> {moment(book.publishDate).format("DD.MM.YYYY")}</p>
         </StyledContainer>
       )}
       {error && <Notification />}

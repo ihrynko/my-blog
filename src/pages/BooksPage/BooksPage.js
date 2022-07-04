@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getBooks } from "../../api/books";
+import moment from "moment";
 import { Spinner } from "reactstrap";
 import Notification from "../../components/Notification";
 import { StyledList, StyledItem, StyledLink } from "./styled";
@@ -26,7 +27,7 @@ export default function BooksPage() {
                 <h3>{book.title}</h3>
                 <p>Description: {book.description.slice(0, 200)}</p>
                 <p>
-                  Create Date: {new Date(book.publishDate).toLocaleDateString()}
+                  Create Date: {moment(book.publishDate).format("DD.MM.YYYY")}
                 </p>
                 <StyledLink to={`/books/${book.id}`}>
                   <button>View more</button>

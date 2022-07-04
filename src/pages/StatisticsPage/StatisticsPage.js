@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { getBooks } from "../../api/books";
+import moment from "moment";
 import StatisticsTable from "./Table";
 import { Spinner } from "reactstrap";
 import Notification from "../../components/Notification";
@@ -38,8 +39,7 @@ export default function StaticticsPage() {
       },
       {
         Header: "CREATE DATE",
-        accessor: (row) => new Date(row.publishDate),
-        Cell: ({ cell: { value } }) => value.toLocaleDateString(),
+        accessor: (row) => moment(row.publishDate).format("DD.MM.YYYY"),
       },
     ],
 
