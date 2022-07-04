@@ -4,7 +4,12 @@ import moment from "moment";
 import { getBookItem } from "../../api/books";
 import Notification from "../../components/Notification";
 import { Spinner } from "reactstrap";
-import { StyledContainer } from "./styled";
+import {
+  StyledContainer,
+  StyledTitle,
+  StyledSubtitle,
+  StyledInfo,
+} from "./styled";
 
 export default function BookItemPage() {
   const { bookId } = useParams();
@@ -23,15 +28,23 @@ export default function BookItemPage() {
       {loading && !book && !error && <Spinner />}
       {book && !error && (
         <StyledContainer>
-          <h1>{book.title}</h1>
-          <h2>Description</h2>
-          <p>{book.description}</p>
-          <h2>Number of pages</h2>
-          <p>{book.pageCount}</p>
-          <h2>Excerpt</h2>
-          <p>{book.excerpt}</p>
-          <h2>Day of publication</h2>
-          <p> {moment(book.publishDate).format("DD.MM.YYYY")}</p>
+          <StyledTitle>{book.title}</StyledTitle>
+          <StyledInfo>
+            <StyledSubtitle>Description</StyledSubtitle>
+            <p>{book.description}</p>
+          </StyledInfo>
+          <StyledInfo>
+            <StyledSubtitle>Number of pages</StyledSubtitle>
+            <p>{book.pageCount}</p>
+          </StyledInfo>
+          <StyledInfo>
+            <StyledSubtitle>Excerpt</StyledSubtitle>
+            <p>{book.excerpt}</p>
+          </StyledInfo>
+          <StyledInfo>
+            <StyledSubtitle>Day of publication</StyledSubtitle>
+            <p> {moment(book.publishDate).format("DD.MM.YYYY")}</p>
+          </StyledInfo>
         </StyledContainer>
       )}
       {error && <Notification />}
