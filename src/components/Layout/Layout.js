@@ -1,6 +1,14 @@
 import { Suspense } from "react";
-import { NavItem, Spinner } from "reactstrap";
-import { StyledNav, StyledHeader, StyledNavLink } from "./styled";
+import { Spinner } from "reactstrap";
+import {
+  StyledNav,
+  StyledLogo,
+  StyledList,
+  StyledSpan,
+  StyledHeader,
+  StyledNavItem,
+  StyledNavLink,
+} from "./styled";
 import { Outlet } from "react-router-dom";
 
 export default function Layout() {
@@ -8,16 +16,21 @@ export default function Layout() {
     <>
       <div>
         <StyledHeader>
+          <StyledLogo to="/">
+            My<StyledSpan class="logo__dark">Blog</StyledSpan>
+          </StyledLogo>
           <StyledNav>
-            <NavItem>
-              <StyledNavLink to="/">Home</StyledNavLink>
-            </NavItem>
-            <NavItem>
-              <StyledNavLink to="books">BooksList</StyledNavLink>
-            </NavItem>
-            <NavItem>
-              <StyledNavLink to="statistics">Statistics</StyledNavLink>
-            </NavItem>
+            <StyledList>
+              <StyledNavItem>
+                <StyledNavLink to="/">Home</StyledNavLink>
+              </StyledNavItem>
+              <StyledNavItem>
+                <StyledNavLink to="books">BooksList</StyledNavLink>
+              </StyledNavItem>
+              <StyledNavItem>
+                <StyledNavLink to="statistics">Statistics</StyledNavLink>
+              </StyledNavItem>
+            </StyledList>
           </StyledNav>
         </StyledHeader>
         <div>

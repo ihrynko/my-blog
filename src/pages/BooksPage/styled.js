@@ -1,6 +1,13 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
+export const StyledContainer = styled.div`
+  width: 1200px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+`;
+
 export const StyledList = styled.ul`
   display: flex;
   flex-wrap: wrap;

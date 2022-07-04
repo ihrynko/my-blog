@@ -3,7 +3,7 @@ import { getBooks } from "../../api/books";
 import moment from "moment";
 import { Spinner } from "reactstrap";
 import Notification from "../../components/Notification";
-import { StyledList, StyledItem, StyledLink } from "./styled";
+import { StyledContainer, StyledList, StyledItem, StyledLink } from "./styled";
 
 export default function BooksPage() {
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ export default function BooksPage() {
   }, []);
 
   return (
-    <>
+    <StyledContainer>
       {loading && !books.length && !error && <Spinner />}
       {books.length && !error && (
         <StyledList>
@@ -38,6 +38,6 @@ export default function BooksPage() {
         </StyledList>
       )}
       {error && <Notification />}
-    </>
+    </StyledContainer>
   );
 }

@@ -1,30 +1,72 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import { Nav } from "reactstrap";
 
-export const StyledNav = styled(Nav)`
-  justify-content: end;
+export const StyledNav = styled.nav`
+  margin-left: auto;
 `;
+
+export const StyledSpan = styled.span`
+  color: #ffffff;
+`;
+
+export const StyledList = styled.ul`
+  display: flex;
+`;
+export const StyledLogo = styled(NavLink)`
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.19;
+  letter-spacing: 0.03em;
+  color: #ff6b08;
+  &:hover,
+  &:focus {
+    color: #ff6b08;
+  }
+`;
+
 export const StyledHeader = styled.header`
+  display: flex;
   height: 80px;
-  background: linear-gradient(32deg, #bef5be, #bef5be, #000);
+  padding-right: 30px;
+  padding-left: 30px;
+  background-color: #2f303a;
   border-bottom: 2px solid #ececec;
+  align-items: center;
+`;
+
+export const StyledNavItem = styled.li`
+  &:not(:last-child) {
+    margin-right: 50px;
+  }
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
   color: #ffffff;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &.active {
+    position: relative;
+    padding-bottom: 32px;
     color: #ffffff;
-    box-shadow: 7px 7px 10px 0px rgba(190, 245, 190, 1);
-    text-shadow: #bef5be 4px 4px 3px;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: block;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background-color: #ff6b08;
+    }
   }
-  &:hover {
-    color: green;
+  &:hover,
+  &:focus {
+    color: #ff6b08;
   }
 `;

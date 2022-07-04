@@ -51,7 +51,6 @@ export default function StaticticsPage() {
       {loading && !books.length && !error && <Spinner />}
       {books.length && !error && (
         <StyledContainer>
-          <p>Books Statistics</p>
           {<StatisticsTable columns={columns} data={books} />}
         </StyledContainer>
       )}
