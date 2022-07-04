@@ -1,5 +1,7 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Layout from "../Layout";
 
 const HomePage = lazy(() => import("../../pages/HomePage"));
@@ -10,6 +12,7 @@ const StatisticsPage = lazy(() => import("../../pages/StatisticsPage"));
 function App() {
   return (
     <>
+      <ToastContainer limit={1} />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />

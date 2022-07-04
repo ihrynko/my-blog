@@ -1,13 +1,19 @@
 import { useEffect, useState, useMemo } from "react";
 import { getBooks } from "../../api/books";
 import StatisticsTable from "./Table";
+import { Spinner } from "reactstrap";
+import Notification from "../../components/Notification";
 import { StyledContainer } from "./styled";
 
 export default function StaticticsPage() {
+  const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    getBooks().then(setBooks);
+    getBooks()
+      .then(setBooks, setLoading(false))
+      .catch((error) => setError(error));
   }, []);
 
   const columns = useMemo(
@@ -41,9 +47,15 @@ export default function StaticticsPage() {
   );
 
   return (
-    <StyledContainer>
-      <p>Books Statistics</p>
-      {<StatisticsTable columns={columns} data={books} />}
-    </StyledContainer>
+    <>
+      {loading && !books.length && !error && <Spinner />}
+      {books.length && !error && (
+        <StyledContainer>
+          <p>Books Statistics</p>
+          {<StatisticsTable columns={columns} data={books} />}
+        </StyledContainer>
+      )}
+      {error && <Notification />}
+    </>
   );
 }

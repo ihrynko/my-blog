@@ -8,6 +8,7 @@ export const StyledList = styled.ul`
 `;
 
 export const StyledItem = styled.li`
+  margin-bottom: 30px;
   max-width: 400px;
   margin-right: 30px;
   padding: 20px 24px;
@@ -15,13 +16,12 @@ export const StyledItem = styled.li`
   &:nth-of-type(3n + 3) {
     margin-right: 0;
   }
-`;
-
-export const StyledLink = styled(Link)`
-  margin-bottom: 30px;
   &:nth-last-of-type(-n + 3) {
     margin-bottom: 0;
   }
+`;
+
+export const StyledLink = styled(Link)`
   color: #000000;
   &:focus,
   &:hover {
