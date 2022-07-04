@@ -14,13 +14,13 @@ export const StyledTitle = styled.h1`
   font-size: 50px;
   font-weight: 700;
   color: #212121;
-  margin-bottom: 110px;
+  margin-bottom: 90px;
 `;
 
 export const StyledImg = styled.img`
   max-width: 200px;
   height: 30%;
-  width: 20%;
+  width: 30%;
   border-radius: 100px;
   margin: 0 auto;
 `;

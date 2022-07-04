@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getBookItem } from "../../api/books";
 import Notification from "../../components/Notification";
-import { Spinner } from "reactstrap";
+import Loader from "../../components/Loader";
 import {
   StyledContainer,
   StyledTitle,
@@ -19,13 +19,18 @@ export default function BookItemPage() {
 
   useEffect(() => {
     getBookItem(bookId)
-      .then(setBook, setLoading(false))
+      .then(
+        setBook,
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000)
+      )
       .catch((error) => setError(error));
   }, [bookId]);
 
   return (
     <>
-      {loading && !book && !error && <Spinner />}
+      {loading && !book && !error && <Loader />}
       {book && !error && (
         <StyledContainer>
           <StyledTitle>{book.title}</StyledTitle>

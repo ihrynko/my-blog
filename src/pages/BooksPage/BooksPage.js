@@ -2,7 +2,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getBooks } from "../../api/books";
-import { Spinner } from "reactstrap";
+import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 import {
   StyledContainer,
@@ -21,13 +21,18 @@ export default function BooksPage() {
 
   useEffect(() => {
     getBooks()
-      .then(setBooks, setLoading(false))
+      .then(
+        setBooks,
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000)
+      )
       .catch((error) => setError(error));
   }, []);
 
   return (
     <StyledContainer>
-      {loading && !books.length && !error && <Spinner />}
+      {loading && !books.length && !error && <Loader />}
       {books.length && !error && (
         <StyledList>
           {books.map((book) => {

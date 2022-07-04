@@ -2,8 +2,8 @@ import moment from "moment";
 import { useEffect, useState, useMemo } from "react";
 import { getBooks } from "../../api/books";
 import StatisticsTable from "./Table";
-import { Spinner } from "reactstrap";
 import { StyledContainer } from "./styled";
+import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 
 export default function StaticticsPage() {
@@ -13,7 +13,12 @@ export default function StaticticsPage() {
 
   useEffect(() => {
     getBooks()
-      .then(setBooks, setLoading(false))
+      .then(
+        setBooks,
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000)
+      )
       .catch((error) => setError(error));
   }, []);
 
@@ -48,7 +53,7 @@ export default function StaticticsPage() {
 
   return (
     <>
-      {loading && !books.length && !error && <Spinner />}
+      {loading && !books.length && !error && <Loader />}
       {books.length && !error && (
         <StyledContainer>
           {<StatisticsTable columns={columns} data={books} />}

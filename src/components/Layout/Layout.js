@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Spinner } from "reactstrap";
+import { Outlet } from "react-router-dom";
 import {
   StyledNav,
   StyledLogo,
@@ -9,7 +9,7 @@ import {
   StyledNavItem,
   StyledNavLink,
 } from "./styled";
-import { Outlet } from "react-router-dom";
+import Loader from "../Loader";
 
 export default function Layout() {
   return (
@@ -34,7 +34,7 @@ export default function Layout() {
           </StyledNav>
         </StyledHeader>
         <div>
-          <Suspense fallback={<Spinner color="success">Loading...</Spinner>}>
+          <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </div>
