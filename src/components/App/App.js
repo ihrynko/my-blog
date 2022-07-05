@@ -4,10 +4,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "../Layout";
 
-const HomePage = lazy(() => import("../../pages/HomePage"));
-const BooksPage = lazy(() => import("../../pages/BooksPage"));
-const BookItemPage = lazy(() => import("../../pages/BooksItemPage"));
-const StatisticsPage = lazy(() => import("../../pages/StatisticsPage"));
+const HomePage = lazy(() => import("../../pages/Home"));
+const BooksPage = lazy(() => import("../../pages/Books"));
+const BookItemPage = lazy(() => import("../../pages/BooksItem"));
+const StatisticsPage = lazy(() => import("../../pages/Statistics"));
 
 function App() {
   return (

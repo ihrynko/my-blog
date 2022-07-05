@@ -1,26 +1,14 @@
 import moment from "moment";
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import { getBooks } from "../../api/books";
+import useAxios from "../../hooks";
 import StatisticsTable from "./Table";
 import { StyledContainer } from "./styled";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 
-export default function StaticticsPage() {
-  const [loading, setLoading] = useState(true);
-  const [books, setBooks] = useState([]);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    getBooks()
-      .then(
-        setBooks,
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000)
-      )
-      .catch((error) => setError(error));
-  }, []);
+export default function Statistics() {
+  const { data, error, loading } = useAxios(getBooks);
 
   const columns = useMemo(
     () => [
@@ -53,13 +41,13 @@ export default function StaticticsPage() {
 
   return (
     <>
-      {loading && !books.length && !error && <Loader />}
-      {books.length && !error && (
+      {loading && !data && !error && <Loader />}
+      {!loading && !error && (
         <StyledContainer>
-          {<StatisticsTable columns={columns} data={books} />}
+          {<StatisticsTable columns={columns} data={data} />}
         </StyledContainer>
       )}
-      {error && <Notification />}
+      {!loading && error && <Notification />}
     </>
   );
 }

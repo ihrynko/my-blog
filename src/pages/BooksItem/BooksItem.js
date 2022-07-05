@@ -1,6 +1,6 @@
 import moment from "moment";
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useAxios from "../../hooks";
 import { getBookItem } from "../../api/books";
 import Notification from "../../components/Notification";
 import Loader from "../../components/Loader";
@@ -13,25 +13,12 @@ import {
 
 export default function BookItemPage() {
   const { bookId } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [book, setBook] = useState({});
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    getBookItem(bookId)
-      .then(
-        setBook,
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000)
-      )
-      .catch((error) => setError(error));
-  }, [bookId]);
+  const { error, data: book, loading } = useAxios(() => getBookItem(bookId));
 
   return (
     <>
       {loading && !book && !error && <Loader />}
-      {book && !error && (
+      {!loading && !error && (
         <StyledContainer>
           <StyledTitle>{book.title}</StyledTitle>
           <StyledInfo>
@@ -52,7 +39,7 @@ export default function BookItemPage() {
           </StyledInfo>
         </StyledContainer>
       )}
-      {error && <Notification />}
+      {!loading && error && <Notification />}
     </>
   );
 }

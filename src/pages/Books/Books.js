@@ -1,7 +1,7 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getBooks } from "../../api/books";
+import useAxios from "../../hooks";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 import {
@@ -15,25 +15,12 @@ import {
 } from "./styled";
 
 export default function BooksPage() {
-  const [loading, setLoading] = useState(true);
-  const [books, setBooks] = useState([]);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    getBooks()
-      .then(
-        setBooks,
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000)
-      )
-      .catch((error) => setError(error));
-  }, []);
+  const { data: books, error, loading } = useAxios(getBooks);
 
   return (
     <StyledContainer>
-      {loading && !books.length && !error && <Loader />}
-      {books.length && !error && (
+      {loading && !books && !error && <Loader />}
+      {!loading && !error && (
         <StyledList>
           {books.map((book) => {
             return (
@@ -55,7 +42,7 @@ export default function BooksPage() {
           })}
         </StyledList>
       )}
-      {error && <Notification />}
+      {!loading && error && <Notification />}
     </StyledContainer>
   );
 }
