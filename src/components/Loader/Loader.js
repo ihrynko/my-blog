@@ -4,7 +4,7 @@ import { LoaderWrapper } from "./styled";
 export default function Loader() {
   return (
     <LoaderWrapper>
-      <Oval color="#00BFFF" height={100} width={110} />
+      <Oval color="#ff6b08" secondaryColor="#212121" height={100} width={110} />
     </LoaderWrapper>
   );
 }
