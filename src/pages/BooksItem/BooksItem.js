@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useAxios from "../../hooks";
 import { getBookItem } from "../../api/books";
 import Notification from "../../components/Notification";
@@ -9,19 +9,14 @@ import {
   StyledTitle,
   StyledSubtitle,
   StyledInfo,
-  StyledButton,
 } from "./styled";
 
 export default function BookItemPage() {
   const { bookId } = useParams();
   const { error, data: book, loading } = useAxios(() => getBookItem(bookId));
-  const location = useLocation();
 
   return (
     <>
-      <StyledButton to={location?.state?.from ?? "/books"}>
-        Go back
-      </StyledButton>
       {loading && !book && !error && <Loader />}
       {!loading && !error && (
         <StyledContainer>

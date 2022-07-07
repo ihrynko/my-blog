@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
 
 export const StyledContainer = styled.div`
   width: 80%;
@@ -23,15 +22,4 @@ export const StyledSubtitle = styled.p`
 
 export const StyledInfo = styled.div`
   margin-bottom: 10px;
-`;
-
-export const StyledButton = styled(Link)`
-  font-size: 15px;
-  line-height: 1.33;
-  padding: 10px;
-  color: black;
-  border-radius: 5%;
-  border: 2px solid #3f51b5;
-  box-shadow: #3f51b5;
-  margin-left: 25px;
 `;
