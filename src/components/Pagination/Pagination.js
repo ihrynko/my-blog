@@ -14,24 +14,10 @@ const Pagination = ({ paginationHandler, dataPerPage, count, pageNumber }) => {
     paginationHandler(pageNumberSetter);
   };
 
-  const handlePrevButton = () => {
-    if (1 === pageNumber) {
-      return true;
-    }
-    return false;
-  };
-
-  const handleNextButton = () => {
-    if (allPagesCount.length === pageNumber) {
-      return true;
-    }
-    return false;
-  };
-
   return (
     <StyledContainer>
       <StyledButton
-        disabled={handlePrevButton()}
+        disabled={1 === pageNumber}
         onClick={() => {
           onPaginate(pageNumber - 1);
         }}
@@ -66,7 +52,7 @@ const Pagination = ({ paginationHandler, dataPerPage, count, pageNumber }) => {
       </StyledList>
 
       <StyledButton
-        disabled={handleNextButton()}
+        disabled={allPagesCount.length === pageNumber}
         onClick={() => {
           onPaginate(pageNumber + 1);
         }}
