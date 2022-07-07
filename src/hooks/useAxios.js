@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 export default function useAxios(fetchFunc) {
-  const [data, setData] = useState();
-  const [error, setError] = useState();
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {

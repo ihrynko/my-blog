@@ -1,7 +1,9 @@
 import moment from "moment";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getBooks } from "../../api/books";
 import useAxios from "../../hooks";
+import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 import {
@@ -15,14 +17,21 @@ import {
 } from "./styled";
 
 export default function BooksPage() {
-  const { data: books, error, loading } = useAxios(getBooks);
+  const { data, error, loading } = useAxios(getBooks);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  const itemsCount = 100;
+
+  const indexOfLastPost = currentPage * itemsPerPage;
+  const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+  const currentBooks = data.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <StyledContainer>
-      {loading && !books && !error && <Loader />}
+      {loading && !data && !error && <Loader />}
       {!loading && !error && (
         <StyledList>
-          {books.map((book) => {
+          {currentBooks.map((book) => {
             return (
               <StyledItem key={book.id}>
                 <StyledTitle>{book.title}</StyledTitle>
@@ -41,6 +50,17 @@ export default function BooksPage() {
             );
           })}
         </StyledList>
+      )}
+
+      {!loading && !error && (
+        <div className="pagination-container">
+          <Pagination
+            dataPerPage={itemsPerPage}
+            count={itemsCount}
+            paginationHandler={setCurrentPage}
+            pageNumber={currentPage}
+          />
+        </div>
       )}
       {!loading && error && <Notification />}
     </StyledContainer>
