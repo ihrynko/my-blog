@@ -13,6 +13,6 @@ console.log(combineddSagas);
 console.log(combinedSagas);
 
 export default function* rootSaga() {
-  yield Object.values(combineddSagas).map((saga) => fork(saga));
-  yield Object.values(combinedSagas).map((saga) => fork(saga));
+  yield all(Object.values(combineddSagas).map((saga) => fork(saga)));
+  yield all(Object.values(combinedSagas).map((saga) => fork(saga)));
 }
