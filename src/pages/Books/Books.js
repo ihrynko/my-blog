@@ -1,8 +1,8 @@
 import moment from "moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getBooks } from "../../api/books";
-import useAxios from "../../hooks";
+import { bookFetchInStart } from "./actions/books";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
@@ -15,20 +15,30 @@ import {
   StyledText,
   StyledButton,
 } from "./styled";
+import * as selectors from "./selectors/books";
 
 export default function BooksPage() {
-  const { data, error, loading } = useAxios(getBooks);
+  const loading = useSelector(selectors.bookLoadingSelector);
+  const books = useSelector((state) => selectors.bookDataSelector(state));
+  const error = useSelector(selectors.bookErrorSelector);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(bookFetchInStart());
+  }, [dispatch]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const itemsCount = 100;
 
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const currentBooks = data.slice(indexOfFirstPost, indexOfLastPost);
+  const currentBooks = books.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <StyledContainer>
-      {loading && !data && !error && <Loader />}
+      {loading && !books && !error && <Loader />}
       {!loading && !error && (
         <StyledList>
           {currentBooks.map((book) => {
@@ -53,14 +63,14 @@ export default function BooksPage() {
       )}
 
       {!loading && !error && (
-        <div className="pagination-container">
+        <>
           <Pagination
             dataPerPage={itemsPerPage}
             count={itemsCount}
             paginationHandler={setCurrentPage}
             pageNumber={currentPage}
           />
-        </div>
+        </>
       )}
       {!loading && error && <Notification />}
     </StyledContainer>
