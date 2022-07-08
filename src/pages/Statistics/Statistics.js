@@ -1,14 +1,24 @@
 import moment from "moment";
-import { useMemo } from "react";
-import { getBooks } from "../../api/books";
-import useAxios from "../../hooks";
+import { useMemo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bookFetchInStart } from "./actions/books";
 import StatisticsTable from "./Table";
-import { StyledContainer } from "./styled";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
+import { StyledContainer } from "./styled";
+
+import * as selectors from "./selectors/books";
 
 export default function Statistics() {
-  const { data, error, loading } = useAxios(getBooks);
+  const loading = useSelector(selectors.bookLoadingSelector);
+  const data = useSelector((state) => selectors.bookDataSelector(state));
+  const error = useSelector(selectors.bookErrorSelector);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(bookFetchInStart());
+  }, [dispatch]);
 
   const columns = useMemo(
     () => [
