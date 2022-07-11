@@ -24,15 +24,14 @@ const Pagination = ({ paginationHandler, dataPerPage, count, pageNumber }) => {
       >
         <StyledIcon
           xmlns="http://www.w3.org/2000/svg"
-          class="btn--icon"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="2"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="M15 19l-7-7 7-7"
           />
         </StyledIcon>
@@ -59,17 +58,12 @@ const Pagination = ({ paginationHandler, dataPerPage, count, pageNumber }) => {
       >
         <StyledIcon
           xmlns="http://www.w3.org/2000/svg"
-          class="btn--icon"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="2"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 5l7 7-7 7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
         </StyledIcon>
       </StyledButton>
     </StyledContainer>

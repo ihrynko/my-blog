@@ -1,5 +1,7 @@
 import moment from "moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BOOKS_FETCH_START } from "./action-types/books";
 import { Link } from "react-router-dom";
 import { getBooks } from "../../api/books";
 import useAxios from "../../hooks";
@@ -17,7 +19,15 @@ import {
 } from "./styled";
 
 export default function BooksPage() {
-  const { data, error, loading } = useAxios(getBooks);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.books.data);
+  const loading = useSelector((state) => state.books.loading);
+  const error = useSelector((state) => state.books.error);
+
+  useEffect(() => {
+    dispatch(BOOKS_FETCH_START());
+  }, [dispatch]);
+  // const { data, error, loading } = useAxios(getBooks);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const itemsCount = 100;
