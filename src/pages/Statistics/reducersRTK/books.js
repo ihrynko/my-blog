@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const booksSlice = createSlice({
-  name: "books",
+  name: "statistics",
   initialState,
   reducers: {
     booksFetchStart: () => {},
@@ -26,7 +26,7 @@ const booksSlice = createSlice({
   },
 });
 
-export const booksReducer = booksSlice.reducer;
+export const statisticsReducer = booksSlice.reducer;
 
 export const { booksFetchStart, booksInProgress, booksSuccess, booksError } =
   booksSlice.actions;

@@ -1,13 +1,13 @@
 import moment from "moment";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "./actions/books";
 import { Link } from "react-router-dom";
-// import { getBooks } from "../../api/books";
-// import useAxios from "../../hooks";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
+import { booksFetchStart } from "./reducersRTK/books";
+
+import * as selectors from "./selectors/books";
 import {
   StyledContainer,
   StyledList,
@@ -20,12 +20,12 @@ import {
 
 export default function BooksPage() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.books.data);
-  const loading = useSelector((state) => state.books.loading);
-  const error = useSelector((state) => state.books.error);
+  const data = useSelector((state) => selectors.booksDataSelector(state));
+  const loading = useSelector(selectors.booksLoadingSelector);
+  const error = useSelector(selectors.booksErrorSelector);
 
   useEffect(() => {
-    dispatch({ type: actions.BOOKS_FETCH_START });
+    dispatch(booksFetchStart());
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
