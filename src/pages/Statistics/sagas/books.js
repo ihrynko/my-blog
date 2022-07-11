@@ -1,6 +1,6 @@
 import { put, call, takeLatest } from "redux-saga/effects";
 import { getBooks } from "../../../api/books";
-import { BOOKS_FETCH_START } from "../action-types/books";
+import { STATISTICS_FETCH_START } from "../action-types/books";
 import {
   bookFetchError,
   bookFetchInProgress,
@@ -18,5 +18,5 @@ function* bookFetchSaga() {
 }
 
 export function* booksFetchWatcher() {
-  yield takeLatest(BOOKS_FETCH_START, bookFetchSaga);
+  yield takeLatest(STATISTICS_FETCH_START, bookFetchSaga);
 }

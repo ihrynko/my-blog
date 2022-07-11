@@ -1,24 +1,24 @@
 import {
-  BOOKS_FETCH_START,
-  BOOKS_FETCH_ERROR,
-  BOOKS_FETCH_IN_PROGRESS,
-  BOOKS_FETCH_SUCCESS,
+  STATISTICS_FETCH_START,
+  STATISTICS_FETCH_ERROR,
+  STATISTICS_FETCH_IN_PROGRESS,
+  STATISTICS_FETCH_SUCCESS,
 } from "../action-types/books";
 
 export const bookFetchInStart = () => ({
-  type: BOOKS_FETCH_START,
+  type: STATISTICS_FETCH_START,
 });
 
 export const bookFetchInProgress = () => ({
-  type: BOOKS_FETCH_IN_PROGRESS,
+  type: STATISTICS_FETCH_IN_PROGRESS,
 });
 
 export const bookFetchSuccess = (data) => ({
-  type: BOOKS_FETCH_SUCCESS,
+  type: STATISTICS_FETCH_SUCCESS,
   payload: { data },
 });
 
 export const bookFetchError = (error) => ({
-  type: BOOKS_FETCH_ERROR,
+  type: STATISTICS_FETCH_ERROR,
   payload: { error },
 });
