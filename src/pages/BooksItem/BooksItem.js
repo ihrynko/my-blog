@@ -21,7 +21,7 @@ export default function BookItemPage() {
   const error = useSelector(selectors.bookItemErrorSelector);
 
   useEffect(() => {
-    dispatch(bookItemFetchStart(bookId));
+    dispatch(bookItemFetchStart({ id: bookId }));
   }, [dispatch, bookId]);
 
   return (
