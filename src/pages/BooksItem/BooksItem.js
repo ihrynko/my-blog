@@ -10,13 +10,13 @@ import {
   StyledSubtitle,
   StyledInfo,
 } from "./styled";
-import { bookItemFetchStart } from "./reducersRTK/bookItem";
+import { bookItemFetchStart } from "./slice/bookItem";
 import * as selectors from "./selectors/bookItem";
 
 export default function BookItemPage() {
   const { bookId } = useParams();
   const dispatch = useDispatch();
-  const book = useSelector((state) => selectors.bookItemDataSelector(state));
+  const book = useSelector(selectors.bookItemDataSelector);
   const loading = useSelector(selectors.bookItemLoadingSelector);
   const error = useSelector(selectors.bookItemErrorSelector);
 

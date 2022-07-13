@@ -5,14 +5,14 @@ import StatisticsTable from "./Table";
 import { StyledContainer } from "./styled";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
-import { booksFetchStart } from "./reducersRTK/books";
+import { booksFetchStart } from "./slice/statistics";
 
-import * as selectors from "./selectors/books";
+import * as selectors from "./selectors/statistics";
 
 export default function Statistics() {
   const dispatch = useDispatch();
 
-  const data = useSelector((state) => selectors.booksDataSelector(state));
+  const data = useSelector(selectors.booksDataSelector);
   const loading = useSelector(selectors.booksLoadingSelector);
   const error = useSelector(selectors.booksErrorSelector);
 

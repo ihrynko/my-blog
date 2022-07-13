@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
-import { booksFetchStart } from "./reducersRTK/books";
+import { booksFetchStart } from "./slice/books";
 
 import * as selectors from "./selectors/books";
 import {
@@ -20,7 +20,7 @@ import {
 
 export default function BooksPage() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => selectors.booksDataSelector(state));
+  const data = useSelector(selectors.booksDataSelector);
   const loading = useSelector(selectors.booksLoadingSelector);
   const error = useSelector(selectors.booksErrorSelector);
 
