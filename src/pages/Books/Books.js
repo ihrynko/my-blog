@@ -7,9 +7,9 @@ import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 import { booksFetchStart } from "./slice/books";
-
+import ModalWindow from "../../components/Modal";
 import * as selectors from "./selectors/books";
-import { Dropdown, Menu, Space, Popconfirm } from "antd";
+import { Dropdown, Menu, Space, Popconfirm, Button } from "antd";
 import {
   StyledContainer,
   StyledList,
@@ -26,7 +26,11 @@ export default function BooksPage() {
   const data = useSelector(selectors.booksDataSelector);
   const loading = useSelector(selectors.booksLoadingSelector);
   const error = useSelector(selectors.booksErrorSelector);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
   useEffect(() => {
     dispatch(booksFetchStart());
   }, [dispatch]);
@@ -55,13 +59,12 @@ export default function BooksPage() {
         {
           key: "1",
           label: (
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.antgroup.com"
-            >
+            <Button onClick={showModal}>
+              {" "}
               Edit
-            </a>
+              <ModalWindow isModalVisible={isModalVisible} />
+              {/* </ModalWindow>  */}
+            </Button>
           ),
         },
         {
