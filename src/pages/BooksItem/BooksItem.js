@@ -1,7 +1,7 @@
 import moment from "moment";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useAxios from "../../hooks";
-import { getBookItem } from "../../api/books";
+import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../components/Notification";
 import Loader from "../../components/Loader";
 import {
@@ -10,10 +10,19 @@ import {
   StyledSubtitle,
   StyledInfo,
 } from "./styled";
+import { bookItemFetchStart } from "./slice/bookItem";
+import * as selectors from "./selectors/bookItem";
 
 export default function BookItemPage() {
   const { bookId } = useParams();
-  const { error, data: book, loading } = useAxios(() => getBookItem(bookId));
+  const dispatch = useDispatch();
+  const book = useSelector(selectors.bookItemDataSelector);
+  const loading = useSelector(selectors.bookItemLoadingSelector);
+  const error = useSelector(selectors.bookItemErrorSelector);
+
+  useEffect(() => {
+    dispatch(bookItemFetchStart({ id: bookId }));
+  }, [dispatch, bookId]);
 
   return (
     <>
