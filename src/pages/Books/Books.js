@@ -6,11 +6,9 @@ import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 import { booksFetchStart } from "./slice/books";
-import { modalFetchStart } from "../Modal/slice/modal";
-import { modalFetchClose } from "../Modal/slice/modal";
-import { addBookFetchStart } from "../Modal/slice/modal";
-import { updateBookFetchStart } from "../Modal/slice/modal";
-import { deleteBookFetchStart } from "../Modal/slice/modal";
+import { addBookFetchStart } from "./Modal/slice/modal";
+import { updateBookFetchStart } from "./Modal/slice/modal";
+import { deleteBookFetchStart } from "./Modal/slice/modal";
 import ModalWindow from "../../components/Modal";
 import Form from "../../components/Modal/Form";
 import MenuContainer from "../../components/Menu";
@@ -34,6 +32,16 @@ export default function BooksPage() {
   const loading = useSelector(selectors.booksLoadingSelector);
   const error = useSelector(selectors.booksErrorSelector);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const itemsPerPage = 6;
   const itemsCount = 100;
 
@@ -45,18 +53,16 @@ export default function BooksPage() {
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const pageBooks = data.slice(indexOfFirstPost, indexOfLastPost);
 
-  const showModal = () => dispatch(modalFetchStart());
-  const closeModal = () => dispatch(modalFetchClose());
   const deleteConfirm = (id) => {
+    setIsModalVisible(false);
     dispatch(deleteBookFetchStart(id));
     toast.success("Book is deleted");
   };
 
-  const cancel = () => {
-    closeModal();
-    toast.error("Click on No");
+  const handleAddBookSubmit = (book) => {
+    console.log(book);
+    dispatch(addBookFetchStart(book));
   };
-  const handleAddBookSubmit = (book) => dispatch(addBookFetchStart(book));
   const handleUpdateBookSubmit = (id) => dispatch(updateBookFetchStart(id));
 
   return (
@@ -64,33 +70,31 @@ export default function BooksPage() {
       {loading && !data && !error && <Loader />}
       {!loading && !error && (
         <>
-          <StyledButton onClick={showModal}>
-            Create book
-            <ModalWindow
-              title="Create book"
-              loading={loading}
-              handleCloseModal={closeModal}
-            >
-              <Form onSubmit={handleAddBookSubmit} />
-            </ModalWindow>
-          </StyledButton>
+          <StyledButton onClick={showModal}> Create book</StyledButton>
 
+          <ModalWindow
+            title="Create book"
+            visible={isModalVisible}
+            handleCloseModal={handleCancel}
+          >
+            <Form onClose={handleCancel} />
+          </ModalWindow>
           <StyledList>
             {pageBooks.map((book) => {
               return (
                 <StyledItem key={book.id}>
                   <StyledMoreContainer>
                     <StyledTitle>{book.title}</StyledTitle>
-                    <Dropdown
+                    {/* <Dropdown
                       overlay={
                         <MenuContainer
                           showModal={showModal}
                           book={book}
-                          confirm={deleteConfirm(book.id)}
-                          cancel={cancel}
-                          onSubmit={handleUpdateBookSubmit(book.id)}
+                          confirm={() => deleteConfirm(book.id)}
+                          cancel={handleCancel}
+                          onSubmit={() => handleUpdateBookSubmit(book.id)}
                           loading={loading}
-                          handleCloseModal={closeModal}
+                          handleCloseModal={handleCancel}
                         />
                       }
                       placement="right"
@@ -98,7 +102,7 @@ export default function BooksPage() {
                       <Space>
                         <StyledMoreIcon />
                       </Space>
-                    </Dropdown>
+                    </Dropdown> */}
                   </StyledMoreContainer>
                   <StyledText>
                     <StyledSubtitle>Description: </StyledSubtitle>

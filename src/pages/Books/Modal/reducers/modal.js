@@ -21,7 +21,7 @@ export const modalExtraReducer = {
     state.loading = true;
   },
   [deleteFunctionStart.fulfilled]: (state, action) => {
-    state.onShow = true;
+    // state.onShow = true;
     state.loading = false;
     state.data = state.data.filter((book) => book.id !== action.payload);
   },
@@ -33,7 +33,7 @@ export const modalExtraReducer = {
     state.loading = true;
   },
   [updateFunctionStart.fulfilled]: (state, action) => {
-    state.onShow = true;
+    // state.onShow = true;
     state.loading = false;
     state.data = action.payload;
   },

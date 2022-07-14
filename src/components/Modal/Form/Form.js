@@ -1,12 +1,21 @@
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { StyledForm } from "./styled";
+import { addBookFetchStart } from "../../../pages/Books/Modal/slice/modal";
 
-const Form = ({ onSubmit }) => {
+const Form = ({ onClose }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (book) => {
+    dispatch(addBookFetchStart(book));
+    onClose();
+  };
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>

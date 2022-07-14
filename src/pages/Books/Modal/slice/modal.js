@@ -7,17 +7,17 @@ const initialState = {
   data: {},
   loading: true,
   error: null,
-  onShow: false,
+  // onShow: false,
 };
 
 const modalSlice = createSlice({
   name: MODAL,
   initialState,
   reducers: {
-    modalFetchClose: () => {},
-    modalFetchStart: () => {
-      this.state.onShow = true;
-    },
+    // modalFetchStart: () => {},
+    // modalFetchStart: () => {
+    //   this.state.onShow = true;
+    // },
     addBookFetchStart: () => {},
     deleteBookFetchStart: () => {},
     updateBookFetchStart: () => {},
@@ -28,8 +28,7 @@ const modalSlice = createSlice({
 export const modalReducer = modalSlice.reducer;
 
 export const {
-  modalFetchClose,
-  modalFetchStart,
+  // modalFetchStart,
   addBookFetchStart,
   deleteBookFetchStart,
   updateBookFetchStart,

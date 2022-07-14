@@ -16,9 +16,9 @@ export const getBookItem = async (bookId) => {
   }
 };
 
-export const addBook = async () => {
+export const addBook = async (book) => {
   try {
-    return await client.post(`/Books`);
+    return await client.post(`/Books`, book);
   } catch (error) {
     return Promise.reject(error);
   }
