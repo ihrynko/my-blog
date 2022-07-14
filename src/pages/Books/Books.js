@@ -1,14 +1,11 @@
 import moment from "moment";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 import { booksFetchStart } from "./slice/books";
-import { addBookFetchStart } from "./Modal/slice/modal";
 import { updateBookFetchStart } from "./Modal/slice/modal";
-import { deleteBookFetchStart } from "./Modal/slice/modal";
 import ModalWindow from "../../components/Modal";
 import Form from "../../components/Modal/Form";
 import MenuContainer from "../../components/Menu";
@@ -53,16 +50,6 @@ export default function BooksPage() {
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
   const pageBooks = data.slice(indexOfFirstPost, indexOfLastPost);
 
-  const deleteConfirm = (id) => {
-    setIsModalVisible(false);
-    dispatch(deleteBookFetchStart(id));
-    toast.success("Book is deleted");
-  };
-
-  const handleAddBookSubmit = (book) => {
-    console.log(book);
-    dispatch(addBookFetchStart(book));
-  };
   const handleUpdateBookSubmit = (id) => dispatch(updateBookFetchStart(id));
 
   return (
@@ -85,15 +72,12 @@ export default function BooksPage() {
                 <StyledItem key={book.id}>
                   <StyledMoreContainer>
                     <StyledTitle>{book.title}</StyledTitle>
-                    {/* <Dropdown
+                    <Dropdown
                       overlay={
                         <MenuContainer
                           showModal={showModal}
                           book={book}
-                          confirm={() => deleteConfirm(book.id)}
-                          cancel={handleCancel}
-                          onSubmit={() => handleUpdateBookSubmit(book.id)}
-                          loading={loading}
+                          visible={isModalVisible}
                           handleCloseModal={handleCancel}
                         />
                       }
@@ -102,7 +86,7 @@ export default function BooksPage() {
                       <Space>
                         <StyledMoreIcon />
                       </Space>
-                    </Dropdown> */}
+                    </Dropdown>
                   </StyledMoreContainer>
                   <StyledText>
                     <StyledSubtitle>Description: </StyledSubtitle>

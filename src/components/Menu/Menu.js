@@ -1,18 +1,23 @@
-import ModalWindow from "../Modal";
-import Form from "../Modal/Form";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
 import { Menu, Popconfirm } from "antd";
+import { toast } from "react-toastify";
+import { deleteBookFetchStart } from "../../pages/Books/Modal/slice/modal";
 
-const MenuContainer = ({
-  showModal,
-  book,
-  confirm,
-  cancel,
-  onSubmit,
-  loading,
-  handleCloseModal,
-}) => {
+import ModalWindow from "../Modal";
+import UpdateForm from "../Modal/Form";
+
+const MenuContainer = ({ showModal, book, visible, handleCloseModal }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const deleteBook = (id) => {
+    setIsModalVisible(false);
+    dispatch(deleteBookFetchStart(id));
+    toast.success("Book is deleted");
+  };
   return (
     <Menu
       items={[
@@ -23,10 +28,10 @@ const MenuContainer = ({
               Edit
               <ModalWindow
                 title="Update book"
-                loading={loading}
+                visible={visible}
                 handleCloseModal={handleCloseModal}
               >
-                <Form onSubmit={onSubmit} />
+                <UpdateForm onClose={handleCloseModal} />
               </ModalWindow>
             </p>
           ),
@@ -36,8 +41,8 @@ const MenuContainer = ({
           label: (
             <Popconfirm
               title="Are you sure to delete this book?"
-              onConfirm={confirm}
-              onCancel={cancel}
+              onConfirm={() => deleteBook(book.id)}
+              onCancel={isModalVisible}
               okText="Yes"
               cancelText="No"
               placement="topRight"
