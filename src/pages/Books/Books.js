@@ -29,7 +29,7 @@ export default function BooksPage() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
-    setIsModalVisible(true);
+    setIsModalVisible((isModalVisible) => !isModalVisible);
   };
   useEffect(() => {
     dispatch(booksFetchStart());
@@ -59,12 +59,10 @@ export default function BooksPage() {
         {
           key: "1",
           label: (
-            <Button onClick={showModal}>
-              {" "}
+            <a onClick={showModal}>
               Edit
               <ModalWindow isModalVisible={isModalVisible} />
-              {/* </ModalWindow>  */}
-            </Button>
+            </a>
           ),
         },
         {
