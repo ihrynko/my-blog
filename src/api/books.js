@@ -15,3 +15,27 @@ export const getBookItem = async (bookId) => {
     return Promise.reject(error);
   }
 };
+
+export const addBook = async () => {
+  try {
+    return await client.post(`/Books`);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const deleteBook = async (bookId) => {
+  try {
+    return await client.delete(`/Books/${bookId}`);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const updateBook = async (bookId) => {
+  try {
+    return await client.put(`/Books/${bookId}`);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

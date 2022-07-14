@@ -1,13 +1,28 @@
-// import { useState } from "react";
-import { Modal } from "antd";
+import { Modal, Button } from "antd";
 
-const ModalWindow = ({ isModalVisible }) => {
+const ModalWindow = ({ title, children, handleCloseModal, loading }) => {
   return (
     <>
-      <Modal title="Create book" visible={isModalVisible}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+      <Modal
+        title={title}
+        visible={true}
+        onCancel={handleCloseModal}
+        footer={[
+          <Button key="cancel" onClick={handleCloseModal} loading={loading}>
+            Cancel
+          </Button>,
+          <Button
+            key="submit"
+            form="form"
+            type="primary"
+            htmlType="submit"
+            loading={loading}
+          >
+            Submit
+          </Button>,
+        ]}
+      >
+        {children}
       </Modal>
     </>
   );

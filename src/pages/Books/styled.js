@@ -45,7 +45,7 @@ export const StyledText = styled.p`
 `;
 
 export const StyledButton = styled.button`
-  display: inline-block;
+  display: flex;
   font-family: inherit;
   font-weight: 500;
   font-size: 16px;
