@@ -13,12 +13,13 @@ const Form = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const onSubmit = (book) => {
+    console.log(book);
     dispatch(addBookFetchStart(book));
     onClose();
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)} id="form">
       <label>Title</label>
       <input
         {...register("title", {
