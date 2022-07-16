@@ -1,4 +1,4 @@
-import { booksFetchInStart } from "../operations/books";
+import { booksFetchInStart } from "../thunks/books";
 
 export const booksExtraReducer = {
   [booksFetchInStart.pending]: (state) => {

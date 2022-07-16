@@ -1,6 +1,6 @@
 import { put, takeLatest } from "redux-saga/effects";
 import { booksFetchStart } from "../slice/books";
-import { booksFetchInStart } from "../operations/books";
+import { booksFetchInStart } from "../thunks/books";
 
 function* booksFetchSaga() {
   try {
