@@ -63,7 +63,7 @@ export default function BooksPage() {
           <StyledList>
             {pageBooks.map((book) => {
               return (
-                <StyledItem key={book.id}>
+                <StyledItem key={book._id}>
                   <StyledMoreContainer>
                     <StyledTitle>{book.title}</StyledTitle>
                     {/* <Dropdown
@@ -84,7 +84,7 @@ export default function BooksPage() {
                   </StyledMoreContainer>
                   <StyledText>
                     <StyledSubtitle>Description: </StyledSubtitle>
-                    {book.description.slice(0, 200)}...
+                    {book.description.slice(0, 100)}...
                   </StyledText>
                   <StyledText>
                     <StyledSubtitle>Create Date: </StyledSubtitle>

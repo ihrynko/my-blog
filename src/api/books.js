@@ -34,7 +34,7 @@ export const deleteBook = async (bookId) => {
 
 export const updateBook = async (bookId, book) => {
   try {
-    return await client.put(`/Books/${bookId}`, book);
+    return await client.patch(`/Books/${bookId}`, book);
   } catch (error) {
     return Promise.reject(error);
   }
