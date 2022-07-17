@@ -1,35 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { modalExtraReducer } from "../reducers/modal";
 
-const MODAL = "MODAL";
+const CRUD = "CRUD";
 
 const initialState = {
-  data: {},
+  // data: {},
   loading: true,
   error: null,
-  // onShow: false,
 };
 
-const modalSlice = createSlice({
-  name: MODAL,
+const crudSlice = createSlice({
+  name: CRUD,
   initialState,
-  reducers: {
-    // modalFetchStart: () => {},
-    // modalFetchStart: () => {
-    //   this.state.onShow = true;
-    // },
-    addBookFetchStart: () => {},
-    deleteBookFetchStart: () => {},
-    updateBookFetchStart: () => {},
-  },
+  reducers: {},
   extraReducers: modalExtraReducer,
 });
 
-export const modalReducer = modalSlice.reducer;
-
-export const {
-  // modalFetchStart,
-  addBookFetchStart,
-  deleteBookFetchStart,
-  updateBookFetchStart,
-} = modalSlice.actions;
+export const crudReducer = crudSlice.reducer;

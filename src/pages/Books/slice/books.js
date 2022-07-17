@@ -12,13 +12,10 @@ const initialState = {
 const booksSlice = createSlice({
   name: BOOKS,
   initialState,
-  reducers: {
-    booksFetchStart: () => {},
-  },
+  reducers: {},
   extraReducers: booksExtraReducer,
 });
 
 export const booksReducer = booksSlice.reducer;
 
-export const { booksFetchStart } =
-  booksSlice.actions;
+

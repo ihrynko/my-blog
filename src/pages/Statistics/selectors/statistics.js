@@ -1,18 +1,18 @@
 import { createSelector } from "reselect";
 
-const booksStateSelector = (state) => state.STATISTICS;
+const statisticsStateSelector = (state) => state.STATISTICS;
 
-export const booksLoadingSelector = createSelector(
-  booksStateSelector,
+export const statisticsLoadingSelector = createSelector(
+  statisticsStateSelector,
   (statistics) => statistics.loading
 );
 
-export const booksDataSelector = createSelector(
-  booksStateSelector,
+export const statisticsDataSelector = createSelector(
+  statisticsStateSelector,
   (statistics) => statistics.data
 );
 
-export const booksErrorSelector = createSelector(
-  booksStateSelector,
+export const statisticsErrorSelector = createSelector(
+  statisticsStateSelector,
   (statistics) => statistics.error
 );

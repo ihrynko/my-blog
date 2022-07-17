@@ -1,22 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
-import rootSaga from "./sagas";
 import { booksReducer } from "../pages/Books/slice/books";
+import { crudReducer } from "../pages/Books/Modal/slice/modal";
+import { modalReducer } from "../components/Modal_redux/slice";
 import { bookItemReducer } from "../pages/BooksItem/slice/bookItem";
 import { statisticsReducer } from "../pages/Statistics/slice/statistics";
-
-const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
     BOOKS: booksReducer,
+    CRUD: crudReducer,
     BOOKITEM: bookItemReducer,
     STATISTICS: statisticsReducer,
+    MODAL: modalReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
-
-sagaMiddleware.run(rootSaga);
 
 export default store;

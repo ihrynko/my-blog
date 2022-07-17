@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getBooks } from "../../../api/books";
 
+const STATISTICS_FETCH_IN_START = "STATISTICS_FETCH_IN_START";
+
 export const statisticsFetchStart = createAsyncThunk(
-  "statisticsFetchStart",
+  STATISTICS_FETCH_IN_START,
   async (_, { rejectWithValue }) => {
     try {
       return await getBooks();

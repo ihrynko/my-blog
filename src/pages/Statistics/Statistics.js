@@ -5,19 +5,19 @@ import StatisticsTable from "./Table";
 import { StyledContainer } from "./styled";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
-import { booksFetchStart } from "./slice/statistics";
+import { statisticsFetchStart } from "./thunks/statistics";
 
 import * as selectors from "./selectors/statistics";
 
 export default function Statistics() {
   const dispatch = useDispatch();
 
-  const data = useSelector(selectors.booksDataSelector);
-  const loading = useSelector(selectors.booksLoadingSelector);
-  const error = useSelector(selectors.booksErrorSelector);
+  const data = useSelector(selectors.statisticsDataSelector);
+  const loading = useSelector(selectors.statisticsLoadingSelector);
+  const error = useSelector(selectors.statisticsErrorSelector);
 
   useEffect(() => {
-    dispatch(booksFetchStart());
+    dispatch(statisticsFetchStart());
   }, [dispatch]);
 
   const columns = useMemo(

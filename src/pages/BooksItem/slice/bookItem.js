@@ -12,12 +12,8 @@ const initialState = {
 const bookItemSlice = createSlice({
   name: BOOKITEM,
   initialState,
-  reducers: {
-    bookItemFetchStart: () => {},
-  },
+  reducers: {},
   extraReducers: bookItemExtraReducer,
 });
 
 export const bookItemReducer = bookItemSlice.reducer;
-
-export const { bookItemFetchStart } = bookItemSlice.actions;

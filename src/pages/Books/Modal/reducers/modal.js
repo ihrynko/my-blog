@@ -1,17 +1,18 @@
+import { nanoid } from "@reduxjs/toolkit";
+
 import {
   addFunctionStart,
   deleteFunctionStart,
   updateFunctionStart,
-} from "../operations/modal";
+} from "../thunks/modal";
 
 export const modalExtraReducer = {
   [addFunctionStart.pending]: (state) => {
     state.loading = true;
   },
   [addFunctionStart.fulfilled]: (state, action) => {
-    state.onShow = true;
     state.loading = false;
-    state.data = [...state.data, action.payload];
+    state.data = action.payload;
   },
   [addFunctionStart.rejected]: (state) => {
     state.loading = false;
@@ -21,9 +22,9 @@ export const modalExtraReducer = {
     state.loading = true;
   },
   [deleteFunctionStart.fulfilled]: (state, action) => {
-    // state.onShow = true;
     state.loading = false;
-    state.data = state.data.filter((book) => book.id !== action.payload);
+    const { id } = action.payload;
+    state.data = state.data.filter((book) => book.id !== id);
   },
   [deleteFunctionStart.rejected]: (state) => {
     state.loading = false;
@@ -33,7 +34,6 @@ export const modalExtraReducer = {
     state.loading = true;
   },
   [updateFunctionStart.fulfilled]: (state, action) => {
-    // state.onShow = true;
     state.loading = false;
     state.data = action.payload;
   },

@@ -1,4 +1,4 @@
-import { statisticsFetchStart } from "../operations/statistics";
+import { statisticsFetchStart } from "../thunks/statistics";
 
 export const statisticsExtraReducer = {
   [statisticsFetchStart.pending]: (state, action) => {

@@ -1,18 +1,18 @@
 import { createSelector } from "reselect";
 
-const modalStateSelector = (state) => state.MODAL;
+const crudStateSelector = (state) => state.CRUD;
 
-export const modalLoadingSelector = createSelector(
-  modalStateSelector,
-  (modal) => modal.loading
+export const crudLoadingSelector = createSelector(
+  crudStateSelector,
+  (crud) => crud.loading
 );
 
-export const booksDataSelector = createSelector(
-  modalStateSelector,
-  (modal) => modal.data
-);
+// export const crudDataSelector = createSelector(
+//   crudStateSelector,
+//   (modal) => modal.data
+// );
 
-export const booksErrorSelector = createSelector(
-  modalStateSelector,
+export const crudErrorSelector = createSelector(
+  crudStateSelector,
   (modal) => modal.error
 );

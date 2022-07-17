@@ -12,12 +12,8 @@ const initialState = {
 const statisticsSlice = createSlice({
   name: STATISTICS,
   initialState,
-  reducers: {
-    booksFetchStart: () => {},
-  },
+  reducers: {},
   extraReducers: statisticsExtraReducer,
 });
 
 export const statisticsReducer = statisticsSlice.reducer;
-
-export const { booksFetchStart } = statisticsSlice.actions;

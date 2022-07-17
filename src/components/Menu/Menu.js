@@ -5,8 +5,8 @@ import { Menu, Popconfirm } from "antd";
 import { toast } from "react-toastify";
 import { deleteBookFetchStart } from "../../pages/Books/Modal/slice/modal";
 
-import ModalWindow from "../Modal";
-import UpdateForm from "../Modal/Form";
+import ModalWindow from "../BookAddModal";
+import UpdateForm from "../Form";
 
 const MenuContainer = ({ showModal, book, visible, handleCloseModal }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);

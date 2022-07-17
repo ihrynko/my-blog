@@ -1,11 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { addBook, updateBook, deleteBook } from "../../../../api/books";
+import { booksFetchInStart } from "../../thunks/books";
+import { toggleModal } from "../../../../components/Modal_redux/slice";
+
+const ADD_FUNCTION_START = "ADD_FUNCTION_START";
+const DELETE_FUNCTION_START = "DELETE_FUNCTION_START";
+const UPDATE_FUNCTION_START = "UPDATE_FUNCTION_START";
 
 export const addFunctionStart = createAsyncThunk(
-  "addFunctionStart",
-  async (book, { rejectWithValue }) => {
+  ADD_FUNCTION_START,
+  async (book, { rejectWithValue, dispatch }) => {
     try {
-      return await addBook(book);
+      await addBook(book);
+      dispatch(booksFetchInStart());
+      dispatch(toggleModal());
     } catch (error) {
       return rejectWithValue(error.data);
     }
@@ -13,7 +21,7 @@ export const addFunctionStart = createAsyncThunk(
 );
 
 export const deleteFunctionStart = createAsyncThunk(
-  "deleteFunctionStart",
+  DELETE_FUNCTION_START,
   async (id, { rejectWithValue }) => {
     try {
       return await deleteBook(id);
@@ -24,10 +32,10 @@ export const deleteFunctionStart = createAsyncThunk(
 );
 
 export const updateFunctionStart = createAsyncThunk(
-  "updateFunctionStart",
-  async (id, { rejectWithValue }) => {
+  UPDATE_FUNCTION_START,
+  async ({ id, book }, { rejectWithValue }) => {
     try {
-      return await updateBook(id);
+      return await updateBook(id, book);
     } catch (error) {
       return rejectWithValue(error.data);
     }
