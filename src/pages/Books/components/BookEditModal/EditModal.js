@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
+import { editBookDataSelector } from "../../selectors/editBook";
 import Form from "../Form";
-import { bookItemFetchInStart } from "../../../BooksItem/thunks/bookItem";
+import { updateFetchDataStart } from "../../thunks/editBook";
+import { updateFunctionStart } from "../../thunks/editBook";
+
 // import { updateFunctionStart } from "../../pages/Books/Modal/thunks/modal";
 // import { crudLoadingSelector } from "../../pages/Books/Modal/selectors/modal";
 // import { modalLoadingSelector } from "../Modal_redux/selectors";
@@ -11,21 +13,21 @@ import { bookItemFetchInStart } from "../../../BooksItem/thunks/bookItem";
 import { Modal, Button, Spin } from "antd";
 
 const ModalEditWindow = ({ visible, handleCloseModal }) => {
-  // const loading = useSelector(crudLoadingSelector);
-  const { bookId } = useParams();
+  // const { data } = useSelector(editBookDataSelector);
+  // const { bookId } = useParams();
   const dispatch = useDispatch();
 
   // useEffect(() => {
-  //   dispatch(bookItemFetchInStart(bookId));
-  // }, [dispatch, bookId]);
+  //   dispatch(updateFetchDataStart(data));
+  // }, []);
   const onSubmit = (book) => {
     console.log(book);
-    // const id = book._id;
-    // const data = {
-    //   title: book.title,
-    //   description: book.description,
-    // };
-    // dispatch(updateFunctionStart(id, data));
+    const id = book._id;
+    const data = {
+      title: book.title,
+      description: book.description,
+    };
+    dispatch(updateFunctionStart(data, id));
   };
 
   return (
@@ -48,7 +50,7 @@ const ModalEditWindow = ({ visible, handleCloseModal }) => {
           </Button>,
         ]}
       >
-        <Form onSubmit={onSubmit} />
+        <Form onSave={onSubmit} />
       </Modal>
     </>
   );

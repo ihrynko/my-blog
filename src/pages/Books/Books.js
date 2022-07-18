@@ -13,12 +13,18 @@ import { modalCreateBookOnShowSelector } from "../Books/components/BookAddModal/
 import { modalEditBookOnShowSelector } from "../Books/components/BookEditModal/redux/selectors";
 import { toggleCreateModal } from "../Books/components/BookAddModal/redux/slice";
 import { toggleEditModal } from "../Books/components/BookEditModal/redux/slice";
+import { deleteFunctionStart } from "../Books/thunks/deleteBook";
 
 // import { crudLoadingSelector } from "../Books/Modal/selectors/modal";
 import * as selectors from "./selectors/books";
 // import { modalLoadingSelector } from "./Modal/selectors/modal";
-import { Dropdown, Space, Button } from "antd";
-import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { Dropdown, Space, Button, Popconfirm } from "antd";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  EyeOutlined,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
 
 import {
   StyledContainer,
@@ -93,10 +99,17 @@ export default function BooksPage() {
                       visible={isEditModalVisible}
                       handleCloseModal={handleEditToggleModal}
                     ></ModalEditWindow>
-
-                    <Button>
-                      <DeleteOutlined />
-                    </Button>
+                    <Popconfirm
+                      title={`Are you sure to delete ${book.title}?`}
+                      onConfirm={() => dispatch(deleteFunctionStart(book._id))}
+                      okText="Yes"
+                      cancelText="No"
+                      icon={<QuestionCircleOutlined />}
+                    >
+                      <Button>
+                        <DeleteOutlined />
+                      </Button>
+                    </Popconfirm>
                   </StyledMoreContainer>
                   <StyledText>
                     <StyledSubtitle>Description: </StyledSubtitle>

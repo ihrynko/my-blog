@@ -6,8 +6,7 @@ export const deleteBookExtraReducer = {
   },
   [deleteFunctionStart.fulfilled]: (state, action) => {
     state.loading = false;
-    const { id } = action.payload;
-    state.data = state.data.filter((book) => book.id !== id);
+    state.data = action.payload;
   },
   [deleteFunctionStart.rejected]: (state) => {
     state.loading = false;

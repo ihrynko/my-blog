@@ -11,7 +11,6 @@ export const addFunctionStart = createAsyncThunk(
   async (book, { rejectWithValue, dispatch }) => {
     try {
       await addBook(book);
-      dispatch(booksFetchInStart());
       dispatch(toggleCreateModal());
       await dispatch(booksFetchInStart());
     } catch (error) {
