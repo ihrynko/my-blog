@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { addBook } from "../../../api/books";
 
 import { booksFetchInStart } from "./books";
@@ -13,6 +14,7 @@ export const addFunctionStart = createAsyncThunk(
       await addBook(book);
       dispatch(toggleCreateModal());
       await dispatch(booksFetchInStart());
+      toast.success("Book is created!");
     } catch (error) {
       return rejectWithValue(error.data);
     }

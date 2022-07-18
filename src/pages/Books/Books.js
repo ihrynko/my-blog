@@ -2,23 +2,24 @@ import moment from "moment";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Pagination from "../../components/Pagination";
-import Loader from "../../components/Loader";
-import Notification from "../../components/Notification";
-import { booksFetchInStart } from "./thunks/books";
-import ModalCreateWindow from "../Books/components/BookAddModal/AddModal";
-import ModalEditWindow from "../Books/components/BookEditModal/EditModal";
 
+import { booksFetchInStart } from "./thunks/books";
 import { modalCreateBookOnShowSelector } from "../Books/components/BookAddModal/redux/selectors";
 import { modalEditBookOnShowSelector } from "../Books/components/BookEditModal/redux/selectors";
 import { toggleCreateModal } from "../Books/components/BookAddModal/redux/slice";
 import { toggleEditModal } from "../Books/components/BookEditModal/redux/slice";
 import { deleteFunctionStart } from "../Books/thunks/deleteBook";
+import { updateFunctionStart } from "./thunks/editBook";
 
-// import { crudLoadingSelector } from "../Books/Modal/selectors/modal";
+import Pagination from "../../components/Pagination";
+import Loader from "../../components/Loader";
+import Notification from "../../components/Notification";
+import ModalCreateWindow from "../Books/components/BookAddModal/AddModal";
+import ModalEditWindow from "../Books/components/BookEditModal/EditModal";
+
 import * as selectors from "./selectors/books";
-// import { modalLoadingSelector } from "./Modal/selectors/modal";
-import { Dropdown, Space, Button, Popconfirm } from "antd";
+
+import { Button, Popconfirm } from "antd";
 import {
   EditOutlined,
   DeleteOutlined,
@@ -35,7 +36,6 @@ import {
   StyledButton,
   StyledText,
   StyledMoreContainer,
-  StyledMoreIcon,
 } from "./styled";
 
 export default function BooksPage() {
@@ -46,7 +46,6 @@ export default function BooksPage() {
   const isCreateModalVisible = useSelector(modalCreateBookOnShowSelector);
   const isEditModalVisible = useSelector(modalEditBookOnShowSelector);
 
-  // const modalLoading = useSelector(crudLoadingSelector);
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleCreateToggleModal = () => {
@@ -85,7 +84,6 @@ export default function BooksPage() {
               return (
                 <StyledItem key={book._id}>
                   <StyledMoreContainer>
-                    <StyledTitle>{book.title}</StyledTitle>
                     <Link to={`/books/${book._id}`}>
                       <Button>
                         <EyeOutlined />
@@ -111,6 +109,9 @@ export default function BooksPage() {
                       </Button>
                     </Popconfirm>
                   </StyledMoreContainer>
+
+                  <StyledTitle>{book.title}</StyledTitle>
+
                   <StyledText>
                     <StyledSubtitle>Description: </StyledSubtitle>
                     {book.description.slice(0, 100)}...
@@ -127,7 +128,7 @@ export default function BooksPage() {
       )}
 
       {!loading && !error && (
-        <div className="pagination-container">
+        <div>
           <Pagination
             dataPerPage={itemsPerPage}
             count={itemsCount}

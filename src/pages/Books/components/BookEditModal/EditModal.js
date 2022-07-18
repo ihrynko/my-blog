@@ -5,31 +5,27 @@ import { editBookDataSelector } from "../../selectors/editBook";
 import Form from "../Form";
 import { updateFetchDataStart } from "../../thunks/editBook";
 import { updateFunctionStart } from "../../thunks/editBook";
-
-// import { updateFunctionStart } from "../../pages/Books/Modal/thunks/modal";
-// import { crudLoadingSelector } from "../../pages/Books/Modal/selectors/modal";
-// import { modalLoadingSelector } from "../Modal_redux/selectors";
-
-import { Modal, Button, Spin } from "antd";
+import { StyledButton } from "./styled";
+import { Modal, Button } from "antd";
 
 const ModalEditWindow = ({ visible, handleCloseModal }) => {
-  // const { data } = useSelector(editBookDataSelector);
-  // const { bookId } = useParams();
   const dispatch = useDispatch();
+  const data = useSelector(editBookDataSelector);
 
   // useEffect(() => {
   //   dispatch(updateFetchDataStart(data));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
-  const onSubmit = (book) => {
-    console.log(book);
-    const id = book._id;
-    const data = {
-      title: book.title,
-      description: book.description,
-    };
-    dispatch(updateFunctionStart(data, id));
-  };
+  const onSubmit = (event) => {
+    console.log(event);
+    // const id = event._id;
+    // const article = {
+    //   title: event.title,
+    //   description: event.description,
+    // };
 
+    // dispatch(updateFunctionStart(id, article));
+  };
   return (
     <>
       <Modal
@@ -40,17 +36,17 @@ const ModalEditWindow = ({ visible, handleCloseModal }) => {
           <Button key="cancel-edit" onClick={handleCloseModal}>
             Cancel
           </Button>,
-          <Button
+          <StyledButton
             key="submit-edit"
             form="form"
             type="primary"
             htmlType="submit"
           >
             Edit
-          </Button>,
+          </StyledButton>,
         ]}
       >
-        <Form onSave={onSubmit} />
+        <Form onSubmit={onSubmit} data={data} />
       </Modal>
     </>
   );

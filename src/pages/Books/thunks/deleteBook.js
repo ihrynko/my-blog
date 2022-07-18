@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { deleteBook } from "../../../api/books";
 import { booksFetchInStart } from "./books";
 
@@ -10,6 +11,7 @@ export const deleteFunctionStart = createAsyncThunk(
     try {
       await deleteBook(id);
       await dispatch(booksFetchInStart());
+      toast.success("Book is deleted!");
     } catch (error) {
       return rejectWithValue(error.data);
     }

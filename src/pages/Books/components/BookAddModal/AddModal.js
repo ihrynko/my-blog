@@ -2,11 +2,12 @@ import { useDispatch } from "react-redux";
 import Form from "../Form";
 import { addFunctionStart } from "../../thunks/addBook";
 
-import { Modal, Button, Spin } from "antd";
+import { Modal, Button } from "antd";
+import { StyledButton } from "./styled";
 
 const CreateModal = ({ visible, handleCloseModal }) => {
   const dispatch = useDispatch();
-  const onSave = (book) => {
+  const onSubmit = (book) => {
     dispatch(addFunctionStart(book));
   };
   return (
@@ -19,12 +20,17 @@ const CreateModal = ({ visible, handleCloseModal }) => {
           <Button key="cancel" onClick={handleCloseModal}>
             Cancel
           </Button>,
-          <Button key="submit" form="form" type="primary" htmlType="submit">
+          <StyledButton
+            key="submit"
+            form="form"
+            type="primary"
+            htmlType="submit"
+          >
             Submit
-          </Button>,
+          </StyledButton>,
         ]}
       >
-        <Form onSave={onSave} />
+        <Form onSubmit={onSubmit} />
       </Modal>
     </>
   );

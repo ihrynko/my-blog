@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { updateBook, getBookItem } from "../../../api/books";
 import { toggleEditModal } from "../components/BookEditModal/redux/slice";
 import { booksFetchInStart } from "./books";
@@ -10,7 +11,8 @@ export const updateFetchDataStart = createAsyncThunk(
   UPDATE_FETCH_DATA_START,
   async (id, { rejectWithValue }) => {
     try {
-      return await getBookItem(id);
+      const data = await getBookItem(id);
+      return data;
     } catch (error) {
       return rejectWithValue(error.data);
     }
@@ -24,6 +26,7 @@ export const updateFunctionStart = createAsyncThunk(
       await updateBook(id, data);
       dispatch(toggleEditModal());
       await dispatch(booksFetchInStart());
+      toast.success("Book is updated!");
     } catch (error) {
       return rejectWithValue(error.data);
     }

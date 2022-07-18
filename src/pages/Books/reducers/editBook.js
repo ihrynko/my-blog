@@ -15,9 +15,9 @@ export const editBookExtraReducer = {
   [updateFunctionStart.pending]: (state) => {
     state.loading = true;
   },
-  [updateFunctionStart.fulfilled]: (state, action) => {
+  [updateFunctionStart.fulfilled]: (state) => {
     state.loading = false;
-    // state.data = action.payload;
+    state.data = {};
   },
   [updateFunctionStart.rejected]: (state) => {
     state.loading = false;

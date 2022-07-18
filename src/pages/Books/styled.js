@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { MoreOutlined } from "@ant-design/icons";
 
 export const StyledContainer = styled.div`
   width: 1300px;
@@ -32,8 +31,8 @@ export const StyledItem = styled.li`
 `;
 
 export const StyledTitle = styled.h3`
-  justify-content: space-between;
-
+  font-size: 20px;
+  margin-top: 10px;
   margin-bottom: 8px;
   color: #212121;
 `;
@@ -54,8 +53,8 @@ export const StyledButton = styled.button`
   letter-spacing: 0.03em;
   margin-top: 10px;
   cursor: pointer;
-  color: #212121;
-  background-color: #f5f4fa;
+  color: #ffffff;
+  background-color: #ff6b08;
   padding: 6px 22px;
   border: 1px solid #ff6b08;
   border-radius: 4px;
@@ -65,16 +64,11 @@ export const StyledButton = styled.button`
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
-    color: #ffffff;
-    background-color: #ff6b08;
+    color: #212121;
+    background-color: #f5f4fa;
     box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
       0px 2px 2px rgba(0, 0, 0, 0.12);
   }
-`;
-export const StyledMoreIcon = styled(MoreOutlined)`
-  cursor: pointer;
-  font-size: 25px;
-  color: #212121;
 `;
 
 export const StyledMoreContainer = styled.div`
