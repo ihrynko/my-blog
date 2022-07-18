@@ -18,7 +18,8 @@ export const StyledItem = styled.li`
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
-  max-width: 400px;
+  width: 400px;
+  height: 250px;
   margin-right: 30px;
   padding: 20px 24px;
   border: 1px solid #ececec;

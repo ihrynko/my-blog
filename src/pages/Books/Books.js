@@ -1,18 +1,25 @@
 import moment from "moment";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
 import { booksFetchInStart } from "./thunks/books";
-// import { updateBookFetchStart } from "./Modal/slice/modal";
-import ModalWindow from "../../components/BookAddModal";
-// import MenuContainer from "../../components/Menu";
-import { modalOnShowSelector } from "../../components/Modal_redux/selectors";
-import { toggleModal } from "../../components/Modal_redux/slice";
+import ModalCreateWindow from "../Books/components/BookAddModal/AddModal";
+import ModalEditWindow from "../Books/components/BookEditModal/EditModal";
+
+import { modalCreateBookOnShowSelector } from "../Books/components/BookAddModal/redux/selectors";
+import { modalEditBookOnShowSelector } from "../Books/components/BookEditModal/redux/selectors";
+import { toggleCreateModal } from "../Books/components/BookAddModal/redux/slice";
+import { toggleEditModal } from "../Books/components/BookEditModal/redux/slice";
+
+// import { crudLoadingSelector } from "../Books/Modal/selectors/modal";
 import * as selectors from "./selectors/books";
 // import { modalLoadingSelector } from "./Modal/selectors/modal";
-// import { Dropdown, Space } from "antd";
+import { Dropdown, Space, Button } from "antd";
+import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+
 import {
   StyledContainer,
   StyledList,
@@ -30,15 +37,21 @@ export default function BooksPage() {
   const data = useSelector(selectors.booksDataSelector);
   const loading = useSelector(selectors.booksLoadingSelector);
   const error = useSelector(selectors.booksErrorSelector);
-  const isModalVisible = useSelector(modalOnShowSelector);
+  const isCreateModalVisible = useSelector(modalCreateBookOnShowSelector);
+  const isEditModalVisible = useSelector(modalEditBookOnShowSelector);
+
+  // const modalLoading = useSelector(crudLoadingSelector);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleToggleModal = () => {
-    dispatch(toggleModal());
+  const handleCreateToggleModal = () => {
+    dispatch(toggleCreateModal());
+  };
+  const handleEditToggleModal = () => {
+    dispatch(toggleEditModal());
   };
 
   const itemsPerPage = 6;
-  const itemsCount = 10;
+  const itemsCount = 100;
 
   useEffect(() => {
     dispatch(booksFetchInStart());
@@ -53,34 +66,37 @@ export default function BooksPage() {
       {loading && !data && !error && <Loader />}
       {!loading && !error && (
         <>
-          <StyledButton onClick={handleToggleModal}>Create book</StyledButton>
+          <StyledButton onClick={handleCreateToggleModal}>
+            Create book
+          </StyledButton>
 
-          <ModalWindow
-            visible={isModalVisible}
-            handleCloseModal={handleToggleModal}
-            // loading={addLoading}
-          ></ModalWindow>
+          <ModalCreateWindow
+            visible={isCreateModalVisible}
+            handleCloseModal={handleCreateToggleModal}
+          ></ModalCreateWindow>
           <StyledList>
             {pageBooks.map((book) => {
               return (
                 <StyledItem key={book._id}>
                   <StyledMoreContainer>
                     <StyledTitle>{book.title}</StyledTitle>
-                    {/* <Dropdown
-                      overlay={
-                        <MenuContainer
-                          showModal={showModal}
-                          book={book}
-                          visible={isModalVisible}
-                          handleCloseModal={handleCancel}
-                        />
-                      }
-                      placement="right"
-                    >
-                      <Space>
-                        <StyledMoreIcon />
-                      </Space>
-                    </Dropdown> */}
+                    <Link to={`/books/${book._id}`}>
+                      <Button>
+                        <EyeOutlined />
+                      </Button>
+                    </Link>
+
+                    <Button onClick={handleEditToggleModal}>
+                      <EditOutlined />
+                    </Button>
+                    <ModalEditWindow
+                      visible={isEditModalVisible}
+                      handleCloseModal={handleEditToggleModal}
+                    ></ModalEditWindow>
+
+                    <Button>
+                      <DeleteOutlined />
+                    </Button>
                   </StyledMoreContainer>
                   <StyledText>
                     <StyledSubtitle>Description: </StyledSubtitle>
@@ -88,7 +104,7 @@ export default function BooksPage() {
                   </StyledText>
                   <StyledText>
                     <StyledSubtitle>Create Date: </StyledSubtitle>
-                    {moment(book.publishDate).format("DD.MM.YYYY")}
+                    {moment(book.createdAt).format("DD.MM.YYYY")}
                   </StyledText>
                 </StyledItem>
               );
