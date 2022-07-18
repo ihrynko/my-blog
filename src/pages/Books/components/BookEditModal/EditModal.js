@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { editBookDataSelector } from "../../selectors/editBook";
 import Form from "../Form";
 import { updateFetchDataStart } from "../../thunks/editBook";
@@ -10,21 +9,21 @@ import { Modal, Button } from "antd";
 
 const ModalEditWindow = ({ visible, handleCloseModal }) => {
   const dispatch = useDispatch();
-  const data = useSelector(editBookDataSelector);
+  // const data = useSelector(editBookDataSelector);
 
   // useEffect(() => {
   //   dispatch(updateFetchDataStart(data));
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
-  const onSubmit = (event) => {
-    console.log(event);
-    // const id = event._id;
-    // const article = {
-    //   title: event.title,
-    //   description: event.description,
+  const onSubmit = (book) => {
+    console.log(book);
+    // const id = book._id;
+    // const book = {
+    //   title: book.title,
+    //   description: book.description,
     // };
 
-    // dispatch(updateFunctionStart(id, article));
+    // dispatch(updateFunctionStart(id, book));
   };
   return (
     <>
@@ -32,6 +31,7 @@ const ModalEditWindow = ({ visible, handleCloseModal }) => {
         title="Edit book"
         visible={visible}
         onCancel={handleCloseModal}
+        maskStyle={{ backgroundColor: "#757575", opacity: 0.1 }}
         footer={[
           <Button key="cancel-edit" onClick={handleCloseModal}>
             Cancel
@@ -46,7 +46,7 @@ const ModalEditWindow = ({ visible, handleCloseModal }) => {
           </StyledButton>,
         ]}
       >
-        <Form onSubmit={onSubmit} data={data} />
+        <Form onSubmit={onSubmit} />
       </Modal>
     </>
   );

@@ -1,6 +1,12 @@
 import { useForm } from "react-hook-form";
-import React, { useEffect } from "react";
-import { StyledForm, StyledError, StyledLabel, StyledTextarea } from "./styled";
+// import React, { useEffect } from "react";
+import {
+  StyledForm,
+  StyledError,
+  StyledLabel,
+  StyledTextarea,
+  StyledInput,
+} from "./styled";
 
 const Form = ({ data, onSubmit }) => {
   const {
@@ -14,7 +20,7 @@ const Form = ({ data, onSubmit }) => {
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)} id="form">
       <StyledLabel>Title</StyledLabel>
-      <input
+      <StyledInput
         {...register("title", { required: true, pattern: /^[A-Za-z]+$/i })}
       />
       {errors?.title?.type === "pattern" && (

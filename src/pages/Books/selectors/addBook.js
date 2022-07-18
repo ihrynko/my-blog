@@ -2,17 +2,17 @@ import { createSelector } from "reselect";
 
 const addBookStateSelector = (state) => state.ADDBOOK;
 
-export const crudLoadingSelector = createSelector(
+export const addBookLoadingSelector = createSelector(
   addBookStateSelector,
   (book) => book.loading
 );
 
-export const crudDataSelector = createSelector(
+export const addBookDataSelector = createSelector(
   addBookStateSelector,
   (book) => book.data
 );
 
-export const crudErrorSelector = createSelector(
+export const addBookErrorSelector = createSelector(
   addBookStateSelector,
   (book) => book.error
 );

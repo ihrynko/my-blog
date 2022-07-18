@@ -12,11 +12,17 @@ export const StyledLabel = styled.label`
   margin-top: 8px;
   color: #212121;
 `;
+export const StyledInput = styled.input`
+  &:focus,
+  &:hover {
+    outline-color: #778899;
+  }
+`;
 
 export const StyledTextarea = styled.textarea`
   height: 70px;
   &:focus,
   &:hover {
-    border-color: #212121;
+    outline-color: #778899;
   }
 `;
