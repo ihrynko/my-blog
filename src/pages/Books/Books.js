@@ -10,7 +10,12 @@ import { toggleCreateModal } from "../Books/components/BookAddModal/redux/slice"
 import { toggleEditModal } from "../Books/components/BookEditModal/redux/slice";
 import { deleteFunctionStart } from "../Books/thunks/deleteBook";
 import { updateFunctionStart } from "./thunks/editBook";
-
+import {
+  paginationCurrentPageSelector,
+  paginationItemsPerPageSelector,
+  booksCurrentBooksSelector,
+} from "../../components/Pagination/selectors/pagination";
+import { paginationChangePage } from "../../components/Pagination/slice/pagination";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
@@ -45,8 +50,9 @@ export default function BooksPage() {
   const error = useSelector(selectors.booksErrorSelector);
   const isCreateModalVisible = useSelector(modalCreateBookOnShowSelector);
   const isEditModalVisible = useSelector(modalEditBookOnShowSelector);
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector(paginationCurrentPageSelector);
+  const itemsPerPage = useSelector(paginationItemsPerPageSelector);
+  const pageBooks = useSelector(booksCurrentBooksSelector);
 
   const handleCreateToggleModal = () => {
     dispatch(toggleCreateModal());
@@ -54,17 +60,13 @@ export default function BooksPage() {
   const handleEditToggleModal = () => {
     dispatch(toggleEditModal());
   };
-
-  const itemsPerPage = 6;
-  const itemsCount = 100;
+  const handlePaginate = (pageNumber) => {
+    dispatch(paginationChangePage({ page: pageNumber }));
+  };
 
   useEffect(() => {
     dispatch(booksFetchInStart());
   }, [dispatch]);
-
-  const indexOfLastPost = currentPage * itemsPerPage;
-  const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-  const pageBooks = data.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <StyledContainer>
@@ -117,8 +119,12 @@ export default function BooksPage() {
                     {book.description.slice(0, 100)}...
                   </StyledText>
                   <StyledText>
+                    <StyledSubtitle>Pages: </StyledSubtitle>
+                    {book.pageCount}
+                  </StyledText>
+                  <StyledText>
                     <StyledSubtitle>Create Date: </StyledSubtitle>
-                    {moment(book.createdAt).format("DD.MM.YYYY")}
+                    {moment(book.date).format("DD.MM.YYYY")}
                   </StyledText>
                 </StyledItem>
               );
@@ -128,14 +134,12 @@ export default function BooksPage() {
       )}
 
       {!loading && !error && (
-        <div>
-          <Pagination
-            dataPerPage={itemsPerPage}
-            count={itemsCount}
-            paginationHandler={setCurrentPage}
-            pageNumber={currentPage}
-          />
-        </div>
+        <Pagination
+          dataPerPage={itemsPerPage}
+          count={data.length}
+          paginationHandler={handlePaginate}
+          pageNumber={currentPage}
+        />
       )}
       {!loading && error && <Notification />}
     </StyledContainer>

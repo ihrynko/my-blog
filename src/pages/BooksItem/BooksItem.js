@@ -41,8 +41,12 @@ export default function BookItemPage() {
               <p>{book.description}</p>
             </StyledInfo>
             <StyledInfo>
+              <StyledSubtitle>Pages: </StyledSubtitle>
+              {book.pageCount}
+            </StyledInfo>
+            <StyledInfo>
               <StyledSubtitle>Day of publication</StyledSubtitle>
-              <p> {moment(book.createdAt).format("DD.MM.YYYY")}</p>
+              <p> {moment(book.date).format("DD.MM.YYYY")}</p>
             </StyledInfo>
           </StyledContainer>
         </>

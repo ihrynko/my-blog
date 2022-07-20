@@ -7,6 +7,7 @@ import { modalCreateReducer } from "../pages/Books/components/BookAddModal/redux
 import { modalEditReducer } from "../pages/Books/components/BookEditModal/redux/slice";
 import { bookItemReducer } from "../pages/BooksItem/slice/bookItem";
 import { statisticsReducer } from "../pages/Statistics/slice/statistics";
+import { paginationReducer } from "../components/Pagination/slice/pagination";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     DELETEBOOK: deleteBookReducer,
     CREATEMODAL: modalCreateReducer,
     EDITMODAL: modalEditReducer,
+    PAGINATION: paginationReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

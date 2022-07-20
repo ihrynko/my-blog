@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-// import React, { useEffect } from "react";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   StyledForm,
   StyledError,
@@ -8,40 +9,34 @@ import {
   StyledInput,
 } from "./styled";
 
+const schema = yup.object({
+  title: yup.string().required(),
+  description: yup.string().required(),
+  pages: yup.number().positive().integer().required(),
+});
+
 const Form = ({ data, onSubmit }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: data,
   });
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)} id="form">
       <StyledLabel>Title</StyledLabel>
-      <StyledInput
-        {...register("title", { required: true, pattern: /^[A-Za-z]+$/i })}
-      />
-      {errors?.title?.type === "pattern" && (
-        <StyledError>Alphabetical characters only</StyledError>
-      )}
-      {errors.title?.type === "required" && (
-        <StyledError>Title is required</StyledError>
-      )}
+      <StyledInput {...register("title")} />
+      <StyledError>{errors.title?.message}</StyledError>
       <StyledLabel>Description</StyledLabel>
-      <StyledTextarea
-        {...register("description", {
-          required: true,
-          pattern: /^[A-Za-z]+$/i,
-        })}
-      />
-      {errors.description?.type === "required" && (
-        <StyledError>Description is required</StyledError>
-      )}
-      {errors?.description?.type === "pattern" && (
-        <StyledError>Alphabetical characters only</StyledError>
-      )}
+      <StyledTextarea {...register("description")} />
+      <StyledError>{errors.description?.message}</StyledError>
+      <StyledLabel>Pages</StyledLabel>
+      <StyledInput {...register("pages")} />
+      <StyledError>{errors.pages?.message}</StyledError>
     </StyledForm>
   );
 };
