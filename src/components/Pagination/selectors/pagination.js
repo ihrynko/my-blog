@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 
 const stateSelector = (state) => state;
-const paginationStateSelector = (state) => state.PAGINATION;
+const paginationStateSelector = (state) => state.pagination;
 
 export const paginationCurrentPageSelector = createSelector(
   paginationStateSelector,
@@ -15,11 +15,11 @@ export const paginationItemsPerPageSelector = createSelector(
 
 export const booksCurrentBooksSelector = createSelector(
   stateSelector,
-  ({ PAGINATION, BOOKS }) => {
-    const { itemsPerPage, currentPage } = PAGINATION;
+  ({ pagination, books }) => {
+    const { itemsPerPage, currentPage } = pagination;
     const indexOfLastBook = itemsPerPage * currentPage;
     const indexOfFirstBook = indexOfLastBook - itemsPerPage;
 
-    return BOOKS.data.slice(indexOfFirstBook, indexOfLastBook);
+    return books.data.slice(indexOfFirstBook, indexOfLastBook);
   }
 );

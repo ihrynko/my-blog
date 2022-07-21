@@ -1,22 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { addBook } from "../../../api/books";
-
 import { booksFetchInStart } from "./books";
-import { toggleCreateModal } from "../components/BookAddModal/redux/slice";
+import {
+  bookCreateInProgressAction,
+  bookCreateSuccessAction,
+  bookCreateErrorAction,
+} from "../reducers/addBook";
+import { modalOpenToggleAction } from "../../../store/modal/reducers/modal";
 
-const ADD_FUNCTION_START = "ADD_FUNCTION_START";
+const ADD_BOOK_THUNK = "ADD_BOOK_THUNK";
 
-export const addFunctionStart = createAsyncThunk(
-  ADD_FUNCTION_START,
-  async (book, { rejectWithValue, dispatch }) => {
+export const addBookItem = createAsyncThunk(
+  ADD_BOOK_THUNK,
+  async (book, { dispatch }) => {
     try {
+      dispatch(bookCreateInProgressAction());
       await addBook(book);
-      dispatch(toggleCreateModal());
+      dispatch(bookCreateSuccessAction());
+      dispatch(modalOpenToggleAction());
       await dispatch(booksFetchInStart());
       toast.success("Book is created!");
     } catch (error) {
-      return rejectWithValue(error.data);
+      dispatch(bookCreateErrorAction(error.data));
+      toast.error("Something went wrong");
     }
   }
 );

@@ -1,26 +1,19 @@
 import moment from "moment";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { booksFetchInStart } from "./thunks/books";
-import { modalCreateBookOnShowSelector } from "../Books/components/BookAddModal/redux/selectors";
-import { modalEditBookOnShowSelector } from "../Books/components/BookEditModal/redux/selectors";
-import { toggleCreateModal } from "../Books/components/BookAddModal/redux/slice";
-import { toggleEditModal } from "../Books/components/BookEditModal/redux/slice";
-import { deleteFunctionStart } from "../Books/thunks/deleteBook";
-import { updateFunctionStart } from "./thunks/editBook";
+
 import {
   paginationCurrentPageSelector,
   paginationItemsPerPageSelector,
   booksCurrentBooksSelector,
 } from "../../components/Pagination/selectors/pagination";
-import { paginationChangePage } from "../../components/Pagination/slice/pagination";
+import { paginationChangePage } from "../../components/Pagination/reducer/pagination";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
-import ModalCreateWindow from "../Books/components/BookAddModal/AddModal";
-import ModalEditWindow from "../Books/components/BookEditModal/EditModal";
 
 import * as selectors from "./selectors/books";
 
@@ -48,18 +41,16 @@ export default function BooksPage() {
   const data = useSelector(selectors.booksDataSelector);
   const loading = useSelector(selectors.booksLoadingSelector);
   const error = useSelector(selectors.booksErrorSelector);
-  const isCreateModalVisible = useSelector(modalCreateBookOnShowSelector);
-  const isEditModalVisible = useSelector(modalEditBookOnShowSelector);
   const currentPage = useSelector(paginationCurrentPageSelector);
   const itemsPerPage = useSelector(paginationItemsPerPageSelector);
   const pageBooks = useSelector(booksCurrentBooksSelector);
 
-  const handleCreateToggleModal = () => {
-    dispatch(toggleCreateModal());
-  };
-  const handleEditToggleModal = () => {
-    dispatch(toggleEditModal());
-  };
+  // const handleCreateToggleModal = () => {
+  //   dispatch(toggleCreateModal());
+  // };
+  // const handleEditToggleModal = () => {
+  //   dispatch(toggleEditModal());
+  // };
   const handlePaginate = (pageNumber) => {
     dispatch(paginationChangePage({ page: pageNumber }));
   };
@@ -73,14 +64,14 @@ export default function BooksPage() {
       {loading && !data && !error && <Loader />}
       {!loading && !error && (
         <>
-          <StyledButton onClick={handleCreateToggleModal}>
+          {/* <StyledButton onClick={handleCreateToggleModal}>
             Create book
           </StyledButton>
 
           <ModalCreateWindow
             visible={isCreateModalVisible}
             handleCloseModal={handleCreateToggleModal}
-          ></ModalCreateWindow>
+          ></ModalCreateWindow> */}
           <StyledList>
             {pageBooks.map((book) => {
               return (
@@ -92,7 +83,7 @@ export default function BooksPage() {
                       </Button>
                     </Link>
 
-                    <Button onClick={handleEditToggleModal}>
+                    {/* <Button onClick={handleEditToggleModal}>
                       <EditOutlined />
                     </Button>
                     <ModalEditWindow
@@ -109,7 +100,7 @@ export default function BooksPage() {
                       <Button>
                         <DeleteOutlined />
                       </Button>
-                    </Popconfirm>
+                    </Popconfirm> */}
                   </StyledMoreContainer>
 
                   <StyledTitle>{book.title}</StyledTitle>

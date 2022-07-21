@@ -20,4 +20,4 @@ const paginationSlice = createSlice({
 export const { paginationChangePage, paginationChangeItemsPerPage } =
   paginationSlice.actions;
 
-export const paginationReducer = paginationSlice.reducer;
+export const pagination = paginationSlice.reducer;

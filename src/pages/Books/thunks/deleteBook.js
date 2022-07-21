@@ -2,18 +2,29 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { deleteBook } from "../../../api/books";
 import { booksFetchInStart } from "./books";
+import {
+  bookDeleteSuccessAction,
+  bookDeleteErrorAction,
+  bookDeleteInProgressAction,
+} from "../reducers/deleteBook";
 
-const DELETE_FUNCTION_START = "DELETE_FUNCTION_START";
+import { modalOpenToggleAction } from "../../../store/modal/reducers/modal";
 
-export const deleteFunctionStart = createAsyncThunk(
-  DELETE_FUNCTION_START,
-  async (id, { rejectWithValue, dispatch }) => {
+const BOOK_LIST_DELETE_THUNK_TYPE = "BOOK_LIST_DELETE_THUNK_TYPE";
+
+export const deleteBookItem = createAsyncThunk(
+  BOOK_LIST_DELETE_THUNK_TYPE,
+  async (data, { dispatch }) => {
     try {
-      await deleteBook(id);
+      dispatch(bookDeleteInProgressAction());
+      await deleteBook(data._id);
+      dispatch(bookDeleteSuccessAction());
+      dispatch(modalOpenToggleAction());
       await dispatch(booksFetchInStart());
       toast.success("Book is deleted!");
     } catch (error) {
-      return rejectWithValue(error.data);
+      dispatch(bookDeleteErrorAction(error.data));
+      toast.error("Something went wrong");
     }
   }
 );

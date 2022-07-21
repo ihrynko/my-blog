@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const editBookStateSelector = (state) => state.EDITBOOK;
+const editBookStateSelector = (state) => state.updateBook;
 
 export const editBookLoadingSelector = createSelector(
   editBookStateSelector,
@@ -10,6 +10,10 @@ export const editBookLoadingSelector = createSelector(
 export const editBookDataSelector = createSelector(
   editBookStateSelector,
   (book) => book.data
+);
+export const editBookFetchDataSelector = createSelector(
+  editBookStateSelector,
+  (book) => book.fetchData
 );
 
 export const editBookErrorSelector = createSelector(
