@@ -6,7 +6,7 @@ import {
   bookDeleteError,
 } from "../actions/deleteBook";
 
-const initialState = {
+export const initialState = {
   loading: false,
   data: {},
   error: null,

@@ -1,9 +1,12 @@
 import moment from "moment";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { booksFetchInStart } from "./thunks/books";
+import { addBookItem } from "./thunks/addBook";
+import { updateBookItem } from "./thunks/updateBook";
+import { deleteBookItem } from "./thunks/deleteBook";
 
 import {
   paginationCurrentPageSelector,
@@ -11,6 +14,14 @@ import {
   booksCurrentBooksSelector,
 } from "../../components/Pagination/selectors/pagination";
 import { paginationChangePage } from "../../components/Pagination/reducer/pagination";
+import { bookUpdateItemIdSetAction } from "./reducers/updateBook";
+import { bookDeleteItemDataSetAction } from "./reducers/deleteBook";
+import { modalStateSelector } from "../../store/modal/selectors/modal";
+import { modalOpenToggleAction } from "../../store/modal/reducers/modal";
+import CreateModal from "../Books/components/BookAddModal/AddModal";
+import { UpdateModal } from "../Books/components/BookEditModal/EditModal";
+import { DeleteModal } from "../Books/components/BookDeleteModal/deleteModal";
+
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import Notification from "../../components/Notification";
@@ -45,12 +56,40 @@ export default function BooksPage() {
   const itemsPerPage = useSelector(paginationItemsPerPageSelector);
   const pageBooks = useSelector(booksCurrentBooksSelector);
 
-  // const handleCreateToggleModal = () => {
-  //   dispatch(toggleCreateModal());
-  // };
-  // const handleEditToggleModal = () => {
-  //   dispatch(toggleEditModal());
-  // };
+  const { onShow, name } = useSelector(modalStateSelector);
+
+  const handleCreateBook = (values) => {
+    dispatch(addBookItem(values));
+  };
+  const handleUpdateBook = (values) => {
+    dispatch(updateBookItem(values));
+  };
+
+  const handleDeleteBook = (book) => {
+    dispatch(deleteBookItem(book));
+  };
+
+  const handleCreateModalOpenToggle = () => {
+    dispatch(modalOpenToggleAction({ name: "Create" }));
+  };
+
+  const handleEditOpenModal = useCallback((id) => {
+    dispatch(bookUpdateItemIdSetAction({ id }));
+    dispatch(modalOpenToggleAction({ name: "Update" }));
+    // eslint-disable-next-line
+  }, []);
+
+  const handleEditModalClose = useCallback(() => {
+    dispatch(modalOpenToggleAction({ name: "Update" }));
+    // eslint-disable-next-line
+  }, []);
+
+  const handleDeleteModalOpenToggle = useCallback((item) => {
+    dispatch(bookDeleteItemDataSetAction(item));
+    dispatch(modalOpenToggleAction({ name: "Delete" }));
+    // eslint-disable-next-line
+  }, []);
+
   const handlePaginate = (pageNumber) => {
     dispatch(paginationChangePage({ page: pageNumber }));
   };
@@ -64,14 +103,9 @@ export default function BooksPage() {
       {loading && !data && !error && <Loader />}
       {!loading && !error && (
         <>
-          {/* <StyledButton onClick={handleCreateToggleModal}>
+          <StyledButton onClick={handleCreateModalOpenToggle}>
             Create book
           </StyledButton>
-
-          <ModalCreateWindow
-            visible={isCreateModalVisible}
-            handleCloseModal={handleCreateToggleModal}
-          ></ModalCreateWindow> */}
           <StyledList>
             {pageBooks.map((book) => {
               return (
@@ -83,24 +117,13 @@ export default function BooksPage() {
                       </Button>
                     </Link>
 
-                    {/* <Button onClick={handleEditToggleModal}>
+                    <Button onClick={() => handleEditOpenModal(book._id)}>
                       <EditOutlined />
                     </Button>
-                    <ModalEditWindow
-                      visible={isEditModalVisible}
-                      handleCloseModal={handleEditToggleModal}
-                    ></ModalEditWindow>
-                    <Popconfirm
-                      title={`Are you sure to delete ${book.title}?`}
-                      onConfirm={() => dispatch(deleteFunctionStart(book._id))}
-                      okText="Yes"
-                      cancelText="No"
-                      icon={<QuestionCircleOutlined />}
-                    >
-                      <Button>
-                        <DeleteOutlined />
-                      </Button>
-                    </Popconfirm> */}
+
+                    <Button onClick={() => handleDeleteModalOpenToggle(book)}>
+                      <DeleteOutlined />
+                    </Button>
                   </StyledMoreContainer>
 
                   <StyledTitle>{book.title}</StyledTitle>
@@ -130,6 +153,24 @@ export default function BooksPage() {
           count={data.length}
           paginationHandler={handlePaginate}
           pageNumber={currentPage}
+        />
+      )}
+      {onShow && name === "Create" && (
+        <CreateModal
+          onSave={handleCreateBook}
+          onCancel={handleCreateModalOpenToggle}
+        />
+      )}
+      {onShow && name === "Update" && (
+        <UpdateModal
+          onSave={handleUpdateBook}
+          onCancel={handleEditModalClose}
+        />
+      )}
+      {onShow && name === "Delete" && (
+        <DeleteModal
+          onSave={handleDeleteBook}
+          onCancel={handleDeleteModalOpenToggle}
         />
       )}
       {!loading && error && <Notification />}

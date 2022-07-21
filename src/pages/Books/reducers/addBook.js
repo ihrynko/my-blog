@@ -5,7 +5,7 @@ import {
   bookCreateError,
 } from "../actions/addBook";
 
-const initialState = {
+export const initialState = {
   loading: false,
   data: {},
   error: null,

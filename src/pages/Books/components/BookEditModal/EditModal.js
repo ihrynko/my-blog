@@ -1,55 +1,43 @@
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { editBookDataSelector } from "../../selectors/editBook";
-import Form from "../Form";
-import { updateFetchDataStart } from "../../thunks/editBook";
-import { updateFunctionStart } from "../../thunks/editBook";
-import { StyledButton } from "./styled";
-import { Modal, Button } from "antd";
+import { Modal } from "../../../../components/Modal/Modal";
+import {
+  editBookLoadingSelector,
+  editBookDataSelector,
+  editBookFetchDataSelector,
+} from "../../selectors/updateBook";
+import { updateFetchDataStart } from "../../thunks/updateBook";
+import { Form } from "../Form/Form";
+// import { StyledSpin } from "../DeleteBookModal/styled";
+import { Typography } from "antd";
 
-const ModalEditWindow = ({ visible, handleCloseModal }) => {
+export const UpdateModal = ({ onSave, onCancel }) => {
   const dispatch = useDispatch();
-  // const data = useSelector(editBookDataSelector);
+  const fetchData = useSelector(editBookFetchDataSelector);
+  const data = useSelector(editBookDataSelector);
+  const loading = useSelector(editBookLoadingSelector);
+  const { Text } = Typography;
 
-  // useEffect(() => {
-  //   dispatch(updateFetchDataStart(data));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-  const onSubmit = (book) => {
-    console.log(book);
-    // const id = book._id;
-    // const book = {
-    //   title: book.title,
-    //   description: book.description,
-    // };
+  useEffect(() => {
+    dispatch(updateFetchDataStart(fetchData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    // dispatch(updateFunctionStart(id, book));
-  };
   return (
-    <>
-      <Modal
-        title="Edit book"
-        visible={visible}
-        onCancel={handleCloseModal}
-        maskStyle={{ backgroundColor: "#757575", opacity: 0.1 }}
-        footer={[
-          <Button key="cancel-edit" onClick={handleCloseModal}>
-            Cancel
-          </Button>,
-          <StyledButton
-            key="submit-edit"
-            form="form"
-            type="primary"
-            htmlType="submit"
-          >
-            Edit
-          </StyledButton>,
-        ]}
-      >
-        <Form onSubmit={onSubmit} />
-      </Modal>
-    </>
+    <Modal
+      loading={loading}
+      form="edit"
+      onCancel={onCancel}
+      formName="edit"
+      disable={!data}
+    >
+      {/* <StyledSpin spinning={loading} /> */}
+      <>
+        {!loading && data && (
+          <Form mode="edit" onSave={onSave} data={data} name="edit" />
+        )}
+        {!data && <Text type="danger"> Something went wrong</Text>}
+      </>
+    </Modal>
   );
 };
-
-export default ModalEditWindow;

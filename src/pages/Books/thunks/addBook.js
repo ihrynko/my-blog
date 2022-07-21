@@ -13,10 +13,10 @@ const ADD_BOOK_THUNK = "ADD_BOOK_THUNK";
 
 export const addBookItem = createAsyncThunk(
   ADD_BOOK_THUNK,
-  async (book, { dispatch }) => {
+  async (data, { dispatch }) => {
     try {
       dispatch(bookCreateInProgressAction());
-      await addBook(book);
+      await addBook(data);
       dispatch(bookCreateSuccessAction());
       dispatch(modalOpenToggleAction());
       await dispatch(booksFetchInStart());

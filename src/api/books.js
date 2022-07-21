@@ -2,7 +2,7 @@ import client from "./client";
 
 export const getBooks = async () => {
   try {
-    return await client.get("/Books");
+    return await client.get("/books");
   } catch (error) {
     return Promise.reject(error);
   }
@@ -10,15 +10,15 @@ export const getBooks = async () => {
 
 export const getBookItem = async (bookId) => {
   try {
-    return await client.get(`/Books/${bookId}`);
+    return await client.get(`/books/${bookId}`);
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const addBook = async (book) => {
+export const addBook = async (data) => {
   try {
-    return await client.post(`/Books`, book);
+    return await client.post(`/books`, { ...data });
   } catch (error) {
     return Promise.reject(error);
   }
@@ -32,9 +32,9 @@ export const deleteBook = async (bookId) => {
   }
 };
 
-export const updateBook = async (bookId, book) => {
+export const updateBook = async (data, bookId) => {
   try {
-    return await client.patch(`/Books/${bookId}`, book);
+    return await client.patch(`/Books/${bookId}`, { ...data });
   } catch (error) {
     return Promise.reject(error);
   }

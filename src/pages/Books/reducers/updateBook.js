@@ -9,7 +9,7 @@ import {
 
 const UPDATE_BOOK = "UPDATE_BOOK";
 
-const initialState = {
+export const initialState = {
   loading: true,
   data: {},
   fetchData: {},

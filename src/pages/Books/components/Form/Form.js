@@ -1,6 +1,7 @@
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Input, Typography } from "antd";
 import {
   StyledForm,
   StyledError,
@@ -10,35 +11,82 @@ import {
 } from "./styled";
 
 const schema = yup.object({
-  title: yup.string().required(),
-  description: yup.string().required(),
-  pages: yup.number().positive().integer().required(),
+  title: yup.string().required("This field is required"),
+  description: yup.string().required("This field is required"),
+  pageCount: yup
+    .number()
+    .positive("Value must be a positive number")
+    .integer("Value must be an integer")
+    .required("This field is required"),
 });
 
-const Form = ({ data, onSubmit }) => {
+export const Form = ({ mode, data, name, onSave }) => {
+  const { Text, Title } = Typography;
+  const { TextArea } = Input;
+
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: data,
   });
 
+  const onSubmit = async (values) => {
+    try {
+      if (!data) {
+        onSave(values);
+      } else {
+        onSave({ ...values, id: data._id });
+      }
+    } catch (error) {}
+  };
+
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)} id="form">
-      <StyledLabel>Title</StyledLabel>
-      <StyledInput {...register("title")} />
-      <StyledError>{errors.title?.message}</StyledError>
-      <StyledLabel>Description</StyledLabel>
-      <StyledTextarea {...register("description")} />
-      <StyledError>{errors.description?.message}</StyledError>
-      <StyledLabel>Pages</StyledLabel>
-      <StyledInput {...register("pages")} />
-      <StyledError>{errors.pages?.message}</StyledError>
-    </StyledForm>
+    <>
+      {mode === "create" && <Title level={3}>Create Book</Title>}
+      {mode === "update" && <Title level={3}>Update Book</Title>}
+      <form onSubmit={handleSubmit(onSubmit)} id={name}>
+        <label>Title</label>
+        <Controller
+          render={({ field }) => <Input {...field} />}
+          name="title"
+          control={control}
+          defaultValue={data?.title || ""}
+        />
+        {errors.title && (
+          <Text style={{ display: "block" }} type="danger">
+            {errors.title.message}
+          </Text>
+        )}
+        <label>Description</label>
+        <Controller
+          render={({ field }) => (
+            <TextArea style={{ height: "80px" }} {...field} />
+          )}
+          name="description"
+          control={control}
+          defaultValue={data?.description || ""}
+        />
+        {errors.description && (
+          <Text style={{ display: "block" }} type="danger">
+            {errors.description.message}
+          </Text>
+        )}
+
+        <label>Page Count</label>
+        <Controller
+          render={({ field }) => <Input {...field} />}
+          name="pageCount"
+          control={control}
+          defaultValue={data?.pageCount}
+        />
+        {errors.pageCount && (
+          <Text style={{ display: "block" }} type="danger">
+            {errors.pageCount.message}
+          </Text>
+        )}
+      </form>
+    </>
   );
 };
-
-export default Form;
