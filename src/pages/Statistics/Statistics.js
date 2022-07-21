@@ -3,8 +3,8 @@ import { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StatisticsTable from "./Table";
 import { StyledContainer } from "./styled";
-import Loader from "../../components/Loader";
-import Notification from "../../components/Notification";
+import { Loader } from "../../components/Loader/Loader";
+import { Notification } from "../../components/Notification/Notification";
 import { statisticsFetchStart } from "./thunks/statistics";
 
 import * as selectors from "./selectors/statistics";

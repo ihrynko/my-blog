@@ -2,8 +2,8 @@ import moment from "moment";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Notification from "../../components/Notification";
-import Loader from "../../components/Loader";
+import { Notification } from "../../components/Notification/Notification";
+import { Loader } from "../../components/Loader/Loader";
 import {
   StyledContainer,
   StyledTitle,

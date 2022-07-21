@@ -1,27 +1,32 @@
-import { Button, Modal as AntdModal } from "antd";
-// import { StyledButton } from "./styled";
+import PropTypes from "prop-types";
+import { Modal as AntdModal } from "antd";
+import { StyledConfirmButton, StyledCancelButton } from "./styled";
+
 export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
+  const footer = [
+    <StyledCancelButton key="cancel" onClick={onCancel}>
+      Cancel
+    </StyledCancelButton>,
+    <StyledConfirmButton
+      key="submit"
+      type="primary"
+      danger={formName === "delete" ? true : false}
+      loading={loading}
+      htmlType="submit"
+      form={formName}
+      onClick={onSave}
+    >
+      Confirm
+    </StyledConfirmButton>,
+  ];
+
   return (
     <AntdModal
       visible={true}
       onCancel={onCancel}
       confirmLoading={loading}
-      footer={[
-        <Button key="cancel" onClick={onCancel}>
-          Cancel
-        </Button>,
-        <Button
-          key="submit"
-          type="primary"
-          danger
-          loading={loading}
-          htmlType="submit"
-          form={formName}
-          onClick={onSave}
-        >
-          Confirm
-        </Button>,
-      ]}
+      zIndex={2000}
+      footer={footer}
     >
       {children}
     </AntdModal>
@@ -30,4 +35,12 @@ export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
 
 Modal.defaultProps = {
   onSave: () => {},
+};
+
+Modal.propTypes = {
+  children: PropTypes.node,
+  onCancel: PropTypes.func,
+  loading: PropTypes.bool,
+  formName: PropTypes.string,
+  onSave: PropTypes.func,
 };

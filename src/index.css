@@ -28,21 +28,3 @@ body {
   color: #757575;
   background-color: #ffffff;
 }
-.ant-btn-default:focus,
-.ant-btn-default:hover {
-  color: #ffffff;
-  border: 1px solid #ff6b08;
-  background-color: #ff6b08;
-}
-
-.ant-btn-primary {
-  border: 1px solid #ff6b08;
-  background-color: #ff6b08;
-}
-.ant-btn-primary:focus,
-.ant-btn-primary:hover {
-  border: 1px solid #ff6b08;
-  background-color: #ff6b08;
-  color: #212121;
-  background-color: #f5f4fa;
-}

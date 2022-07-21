@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   StyledContainer,
   StyledList,
@@ -6,7 +7,12 @@ import {
   StyledIcon,
 } from "./styled";
 
-const Pagination = ({ paginationHandler, dataPerPage, count, pageNumber }) => {
+export const Pagination = ({
+  paginationHandler,
+  dataPerPage,
+  count,
+  pageNumber,
+}) => {
   const allPages = Math.ceil(count / dataPerPage);
   const allPagesCount = [...Array(allPages).keys()];
 
@@ -70,4 +76,9 @@ const Pagination = ({ paginationHandler, dataPerPage, count, pageNumber }) => {
   );
 };
 
-export default Pagination;
+Pagination.propTypes = {
+  paginationHandler: PropTypes.func,
+  dataPerPage: PropTypes.number,
+  count: PropTypes.number,
+  pageNumber: PropTypes.number,
+};

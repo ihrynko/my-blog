@@ -1,7 +1,8 @@
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
+import PropTypes from "prop-types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Typography } from "antd";
+import { Typography } from "antd";
 import {
   StyledForm,
   StyledError,
@@ -21,9 +22,7 @@ const schema = yup.object({
 });
 
 export const Form = ({ mode, data, name, onSave }) => {
-  const { Text, Title } = Typography;
-  const { TextArea } = Input;
-
+  const { Title } = Typography;
   const {
     control,
     handleSubmit,
@@ -46,47 +45,44 @@ export const Form = ({ mode, data, name, onSave }) => {
     <>
       {mode === "create" && <Title level={3}>Create Book</Title>}
       {mode === "update" && <Title level={3}>Update Book</Title>}
-      <form onSubmit={handleSubmit(onSubmit)} id={name}>
-        <label>Title</label>
+      <StyledForm onSubmit={handleSubmit(onSubmit)} id={name}>
+        <StyledLabel>Title</StyledLabel>
         <Controller
-          render={({ field }) => <Input {...field} />}
+          render={({ field }) => <StyledInput {...field} />}
           name="title"
           control={control}
           defaultValue={data?.title || ""}
         />
-        {errors.title && (
-          <Text style={{ display: "block" }} type="danger">
-            {errors.title.message}
-          </Text>
-        )}
-        <label>Description</label>
+        {errors.title && <StyledError>{errors.title.message}</StyledError>}
+        <StyledLabel>Description</StyledLabel>
         <Controller
-          render={({ field }) => (
-            <TextArea style={{ height: "80px" }} {...field} />
-          )}
+          render={({ field }) => <StyledTextarea {...field} />}
           name="description"
           control={control}
           defaultValue={data?.description || ""}
         />
         {errors.description && (
-          <Text style={{ display: "block" }} type="danger">
-            {errors.description.message}
-          </Text>
+          <StyledError>{errors.description.message}</StyledError>
         )}
 
-        <label>Page Count</label>
+        <StyledLabel>Pages</StyledLabel>
         <Controller
-          render={({ field }) => <Input {...field} />}
+          render={({ field }) => <StyledInput {...field} />}
           name="pageCount"
           control={control}
           defaultValue={data?.pageCount}
         />
         {errors.pageCount && (
-          <Text style={{ display: "block" }} type="danger">
-            {errors.pageCount.message}
-          </Text>
+          <StyledError>{errors.pageCount.message}</StyledError>
         )}
-      </form>
+      </StyledForm>
     </>
   );
+};
+
+Form.propTypes = {
+  mode: PropTypes.string,
+  data: PropTypes.object,
+  name: PropTypes.string,
+  onSave: PropTypes.func,
 };

@@ -9,7 +9,7 @@ import {
   StyledNavItem,
   StyledNavLink,
 } from "./styled";
-import Loader from "../Loader";
+import { Loader } from "../Loader/Loader";
 
 export default function Layout() {
   return (

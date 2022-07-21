@@ -10,6 +10,7 @@ export const StyledContainer = styled.div`
 export const StyledList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 15px;
 `;
 
@@ -22,11 +23,21 @@ export const StyledItem = styled.li`
   margin-right: 30px;
   padding: 20px 24px;
   border: 1px solid #ececec;
-  &:nth-of-type(3n + 3) {
-    margin-right: 0;
+  @media (min-width: 768px) and (max-width: 1199px) {
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
+    &:nth-last-of-type(2n) {
+      margin-bottom: 0;
+    }
   }
-  &:nth-last-of-type(-n + 3) {
-    margin-bottom: 0;
+  @media (min-width: 1200px) {
+    &:nth-of-type(3n + 3) {
+      margin-right: 0;
+    }
+    &:nth-last-of-type(-n + 3) {
+      margin-bottom: 0;
+    }
   }
 `;
 

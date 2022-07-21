@@ -1,13 +1,11 @@
 import moment from "moment";
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { booksFetchInStart } from "./thunks/books";
 import { addBookItem } from "./thunks/addBook";
 import { updateBookItem } from "./thunks/updateBook";
 import { deleteBookItem } from "./thunks/deleteBook";
-
 import {
   paginationCurrentPageSelector,
   paginationItemsPerPageSelector,
@@ -18,23 +16,15 @@ import { bookUpdateItemIdSetAction } from "./reducers/updateBook";
 import { bookDeleteItemDataSetAction } from "./reducers/deleteBook";
 import { modalStateSelector } from "../../store/modal/selectors/modal";
 import { modalOpenToggleAction } from "../../store/modal/reducers/modal";
-import CreateModal from "../Books/components/BookAddModal/AddModal";
-import { UpdateModal } from "../Books/components/BookEditModal/EditModal";
-import { DeleteModal } from "../Books/components/BookDeleteModal/deleteModal";
-
-import Pagination from "../../components/Pagination";
-import Loader from "../../components/Loader";
-import Notification from "../../components/Notification";
+import { AddBookModal } from "../Books/components/BookAddModal/AddModal";
+import { UpdateBookModal } from "../Books/components/BookEditModal/EditModal";
+import { DeleteBookModal } from "./components/BookDeleteModal/DeleteModal";
+import { DropdownMenu } from "../Books/components/DropdownMenu/DropdownMenu";
+import { Pagination } from "../../components/Pagination/Pagination";
+import { Loader } from "../../components/Loader/Loader";
+import { Notification } from "../../components/Notification/Notification";
 
 import * as selectors from "./selectors/books";
-
-import { Button, Popconfirm } from "antd";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  EyeOutlined,
-  QuestionCircleOutlined,
-} from "@ant-design/icons";
 
 import {
   StyledContainer,
@@ -76,18 +66,15 @@ export default function BooksPage() {
   const handleEditOpenModal = useCallback((id) => {
     dispatch(bookUpdateItemIdSetAction({ id }));
     dispatch(modalOpenToggleAction({ name: "Update" }));
-    // eslint-disable-next-line
   }, []);
 
   const handleEditModalClose = useCallback(() => {
     dispatch(modalOpenToggleAction({ name: "Update" }));
-    // eslint-disable-next-line
   }, []);
 
   const handleDeleteModalOpenToggle = useCallback((item) => {
     dispatch(bookDeleteItemDataSetAction(item));
     dispatch(modalOpenToggleAction({ name: "Delete" }));
-    // eslint-disable-next-line
   }, []);
 
   const handlePaginate = (pageNumber) => {
@@ -111,23 +98,13 @@ export default function BooksPage() {
               return (
                 <StyledItem key={book._id}>
                   <StyledMoreContainer>
-                    <Link to={`/books/${book._id}`}>
-                      <Button>
-                        <EyeOutlined />
-                      </Button>
-                    </Link>
-
-                    <Button onClick={() => handleEditOpenModal(book._id)}>
-                      <EditOutlined />
-                    </Button>
-
-                    <Button onClick={() => handleDeleteModalOpenToggle(book)}>
-                      <DeleteOutlined />
-                    </Button>
+                    <StyledTitle>{book.title}</StyledTitle>
+                    <DropdownMenu
+                      data={book}
+                      onEdit={handleEditOpenModal}
+                      onDelete={handleDeleteModalOpenToggle}
+                    />
                   </StyledMoreContainer>
-
-                  <StyledTitle>{book.title}</StyledTitle>
-
                   <StyledText>
                     <StyledSubtitle>Description: </StyledSubtitle>
                     {book.description.slice(0, 100)}...
@@ -156,19 +133,19 @@ export default function BooksPage() {
         />
       )}
       {onShow && name === "Create" && (
-        <CreateModal
+        <AddBookModal
           onSave={handleCreateBook}
           onCancel={handleCreateModalOpenToggle}
         />
       )}
       {onShow && name === "Update" && (
-        <UpdateModal
+        <UpdateBookModal
           onSave={handleUpdateBook}
           onCancel={handleEditModalClose}
         />
       )}
       {onShow && name === "Delete" && (
-        <DeleteModal
+        <DeleteBookModal
           onSave={handleDeleteBook}
           onCancel={handleDeleteModalOpenToggle}
         />
