@@ -5,6 +5,7 @@ import {
   bookUpdateInProgress,
   bookUpdateSuccess,
   bookUpdateError,
+  updateBookModalReset,
 } from "../actions/updateBook";
 
 const UPDATE_BOOK = "UPDATE_BOOK";
@@ -24,6 +25,7 @@ const updateBookSlice = createSlice({
     bookUpdateSuccess,
     bookUpdateError,
     bookUpdateItemIdSet,
+    updateBookModalReset,
   },
   extraReducers: (builder) => {
     builder
@@ -48,6 +50,7 @@ export const {
   bookUpdateInProgress: bookUpdateInProgressAction,
   bookUpdateSuccess: bookUpdateSuccessAction,
   bookUpdateError: bookUpdateErrorAction,
+  updateBookModalReset: updateBookModalResetAction,
 } = updateBookSlice.actions;
 
 export const updateBook = updateBookSlice.reducer;

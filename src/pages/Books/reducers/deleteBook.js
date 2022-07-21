@@ -4,6 +4,7 @@ import {
   bookDeleteInProgress,
   bookDeleteSuccess,
   bookDeleteError,
+  deleteBookModalReset,
 } from "../actions/deleteBook";
 
 export const initialState = {
@@ -22,6 +23,7 @@ const deleteBookSlice = createSlice({
     bookDeleteInProgress,
     bookDeleteSuccess,
     bookDeleteError,
+    deleteBookModalReset,
   },
 });
 export const {
@@ -29,6 +31,7 @@ export const {
   bookDeleteInProgress: bookDeleteInProgressAction,
   bookDeleteSuccess: bookDeleteSuccessAction,
   bookDeleteError: bookDeleteErrorAction,
+  deleteBookModalReset: deleteBookModalResetAction,
 } = deleteBookSlice.actions;
 
-export const deleteBook =  deleteBookSlice.reducer;
+export const deleteBook = deleteBookSlice.reducer;

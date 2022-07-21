@@ -6,16 +6,26 @@ import { booksFetchInStart } from "./thunks/books";
 import { addBookItem } from "./thunks/addBook";
 import { updateBookItem } from "./thunks/updateBook";
 import { deleteBookItem } from "./thunks/deleteBook";
+
+import { paginationChangePage } from "../../components/Pagination/reducer/pagination";
+import { addBookModalResetAction } from "./reducers/addBook";
+import {
+  bookUpdateItemIdSetAction,
+  updateBookModalResetAction,
+} from "./reducers/updateBook";
+import {
+  bookDeleteItemDataSetAction,
+  deleteBookModalResetAction,
+} from "./reducers/deleteBook";
+import { modalOpenToggleAction } from "../../store/modal/reducers/modal";
+
 import {
   paginationCurrentPageSelector,
   paginationItemsPerPageSelector,
   booksCurrentBooksSelector,
 } from "../../components/Pagination/selectors/pagination";
-import { paginationChangePage } from "../../components/Pagination/reducer/pagination";
-import { bookUpdateItemIdSetAction } from "./reducers/updateBook";
-import { bookDeleteItemDataSetAction } from "./reducers/deleteBook";
 import { modalStateSelector } from "../../store/modal/selectors/modal";
-import { modalOpenToggleAction } from "../../store/modal/reducers/modal";
+
 import { AddBookModal } from "../Books/components/BookAddModal/AddModal";
 import { UpdateBookModal } from "../Books/components/BookEditModal/EditModal";
 import { DeleteBookModal } from "./components/BookDeleteModal/DeleteModal";
@@ -45,8 +55,17 @@ export default function BooksPage() {
   const currentPage = useSelector(paginationCurrentPageSelector);
   const itemsPerPage = useSelector(paginationItemsPerPageSelector);
   const pageBooks = useSelector(booksCurrentBooksSelector);
-
   const { onShow, name } = useSelector(modalStateSelector);
+
+  useEffect(() => {
+    dispatch(booksFetchInStart());
+    return () =>
+      dispatch(
+        addBookModalResetAction(),
+        updateBookModalResetAction(),
+        deleteBookModalResetAction()
+      );
+  }, [dispatch, currentPage]);
 
   const handleCreateBook = (values) => {
     dispatch(addBookItem(values));
@@ -80,10 +99,6 @@ export default function BooksPage() {
   const handlePaginate = (pageNumber) => {
     dispatch(paginationChangePage({ page: pageNumber }));
   };
-
-  useEffect(() => {
-    dispatch(booksFetchInStart());
-  }, [dispatch]);
 
   return (
     <StyledContainer>

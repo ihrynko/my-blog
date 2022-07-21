@@ -1,3 +1,5 @@
+import { initialState } from "../reducers/updateBook";
+
 export const bookUpdateItemIdSet = (state, action) => {
   state.fetchData = action.payload;
 };
@@ -11,4 +13,8 @@ export const bookUpdateSuccess = (state) => {
 export const bookUpdateError = (state) => {
   state.loading = false;
   state.error = true;
+};
+
+export const updateBookModalReset = (state) => {
+  return (state = initialState);
 };

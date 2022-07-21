@@ -1,3 +1,5 @@
+import { initialState } from "../reducers/deleteBook";
+
 export const bookDeleteItemDataSet = (state, action) => {
   state.data = action.payload;
 };
@@ -12,4 +14,8 @@ export const bookDeleteSuccess = (state) => {
 export const bookDeleteError = (state) => {
   state.loading = false;
   state.error = true;
+};
+
+export const deleteBookModalReset = (state) => {
+  return (state = initialState);
 };

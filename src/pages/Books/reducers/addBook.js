@@ -3,6 +3,7 @@ import {
   bookCreateInProgress,
   bookCreateSuccess,
   bookCreateError,
+  addBookModalReset,
 } from "../actions/addBook";
 
 export const initialState = {
@@ -20,12 +21,14 @@ const addBookSlice = createSlice({
     bookCreateInProgress,
     bookCreateSuccess,
     bookCreateError,
+    addBookModalReset,
   },
 });
 export const {
   bookCreateInProgress: bookCreateInProgressAction,
   bookCreateSuccess: bookCreateSuccessAction,
   bookCreateError: bookCreateErrorAction,
+  addBookModalReset: addBookModalResetAction,
 } = addBookSlice.actions;
 
 export const addBook = addBookSlice.reducer;
