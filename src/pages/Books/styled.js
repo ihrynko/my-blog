@@ -62,6 +62,7 @@ export const StyledButton = styled.button`
   font-size: 16px;
   line-height: 1.63;
   letter-spacing: 0.03em;
+  margin: 0 auto;
   margin-top: 10px;
   cursor: pointer;
   color: #ffffff;
