@@ -1,4 +1,4 @@
-import { initialState } from "../reducers/addBook";
+import { initialState } from "../reducers/createBook";
 
 export const bookCreateInProgress = (state) => {
   state.loading = true;
@@ -10,6 +10,6 @@ export const bookCreateError = (state) => {
   state.loading = true;
 };
 
-export const addBookModalReset = (state) => {
+export const bookCreateModalReset = (state) => {
   return (state = initialState);
 };

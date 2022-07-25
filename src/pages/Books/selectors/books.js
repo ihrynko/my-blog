@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const booksStateSelector = (state) => state.books;
+const booksStateSelector = (state) => state.bookList.books;
 
 export const booksLoadingSelector = createSelector(
   booksStateSelector,
@@ -16,4 +16,3 @@ export const booksErrorSelector = createSelector(
   booksStateSelector,
   (books) => books.error
 );
-

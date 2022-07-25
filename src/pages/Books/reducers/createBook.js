@@ -3,8 +3,8 @@ import {
   bookCreateInProgress,
   bookCreateSuccess,
   bookCreateError,
-  addBookModalReset,
-} from "../actions/addBook";
+  bookCreateModalReset,
+} from "../actions/createBook";
 
 export const initialState = {
   loading: false,
@@ -12,23 +12,23 @@ export const initialState = {
   error: null,
 };
 
-const ADD_BOOK = "ADD_BOOK";
+const CREATE_BOOK = "CREATE_BOOK";
 
-const addBookSlice = createSlice({
-  name: ADD_BOOK,
+const createBookSlice = createSlice({
+  name: CREATE_BOOK,
   initialState,
   reducers: {
     bookCreateInProgress,
     bookCreateSuccess,
     bookCreateError,
-    addBookModalReset,
+    bookCreateModalReset,
   },
 });
 export const {
   bookCreateInProgress: bookCreateInProgressAction,
   bookCreateSuccess: bookCreateSuccessAction,
   bookCreateError: bookCreateErrorAction,
-  addBookModalReset: addBookModalResetAction,
-} = addBookSlice.actions;
+  bookCreateModalReset: bookCreateModalResetAction,
+} = createBookSlice.actions;
 
-export const addBook = addBookSlice.reducer;
+export const createBook = createBookSlice.reducer;

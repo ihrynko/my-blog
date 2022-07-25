@@ -4,7 +4,7 @@ import { modalOpenToggle } from "../actions/modal";
 
 const MODAL_SLICE_NAME = "MODAL_SLICE";
 
-const initialState = { onShow: false, name: null };
+const initialState = { open: false, name: null };
 
 const modalSlice = createSlice({
   name: MODAL_SLICE_NAME,

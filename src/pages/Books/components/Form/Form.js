@@ -16,6 +16,7 @@ const schema = yup.object({
   description: yup.string().required("This field is required"),
   pageCount: yup
     .number()
+    .typeError("Value must be a positive number")
     .positive("Value must be a positive number")
     .integer("Value must be an integer")
     .required("This field is required"),
@@ -70,7 +71,7 @@ export const Form = ({ mode, data, name, onSave }) => {
           render={({ field }) => <StyledInput {...field} />}
           name="pageCount"
           control={control}
-          defaultValue={data?.pageCount}
+          defaultValue={data?.pageCount || ""}
         />
         {errors.pageCount && (
           <StyledError>{errors.pageCount.message}</StyledError>

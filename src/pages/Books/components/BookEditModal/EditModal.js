@@ -42,6 +42,6 @@ export const UpdateBookModal = ({ onSave, onCancel }) => {
 };
 
 UpdateBookModal.propTypes = {
-  onSave: PropTypes.func,
-  onCancel: PropTypes.func,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };

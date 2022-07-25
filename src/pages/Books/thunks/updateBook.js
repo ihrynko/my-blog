@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { updateBook, getBookItem } from "../../../api/books";
-import { booksFetchInStart } from "./books";
+import { booksFetchStart } from "./books";
 import {
   bookUpdateInProgressAction,
   bookUpdateSuccessAction,
@@ -32,7 +32,7 @@ export const updateBookItem = createAsyncThunk(
       await updateBook(data, data.id);
       dispatch(bookUpdateSuccessAction());
       dispatch(modalOpenToggleAction());
-      await dispatch(booksFetchInStart());
+      await dispatch(booksFetchStart());
       toast.success("Book is updated!");
     } catch (error) {
       dispatch(bookUpdateErrorAction(error.data));

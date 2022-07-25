@@ -2,13 +2,13 @@ import moment from "moment";
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { booksFetchInStart } from "./thunks/books";
-import { addBookItem } from "./thunks/addBook";
+import { booksFetchStart } from "./thunks/books";
+import { bookCreate } from "./thunks/createBook";
 import { updateBookItem } from "./thunks/updateBook";
 import { deleteBookItem } from "./thunks/deleteBook";
 
 import { paginationChangePage } from "../../components/Pagination/reducer/pagination";
-import { addBookModalResetAction } from "./reducers/addBook";
+import { bookCreateModalResetAction } from "./reducers/createBook";
 import {
   bookUpdateItemIdSetAction,
   updateBookModalResetAction,
@@ -26,7 +26,7 @@ import {
 } from "../../components/Pagination/selectors/pagination";
 import { modalStateSelector } from "../../store/modal/selectors/modal";
 
-import { AddBookModal } from "../Books/components/BookAddModal/AddModal";
+import { CreateBookModal } from "./components/BookCreateModal/CreateModal";
 import { UpdateBookModal } from "../Books/components/BookEditModal/EditModal";
 import { DeleteBookModal } from "./components/BookDeleteModal/DeleteModal";
 import { DropdownMenu } from "../Books/components/DropdownMenu/DropdownMenu";
@@ -55,20 +55,20 @@ export default function BooksPage() {
   const currentPage = useSelector(paginationCurrentPageSelector);
   const itemsPerPage = useSelector(paginationItemsPerPageSelector);
   const pageBooks = useSelector(booksCurrentBooksSelector);
-  const { onShow, name } = useSelector(modalStateSelector);
+  const { open, name } = useSelector(modalStateSelector);
 
   useEffect(() => {
-    dispatch(booksFetchInStart());
+    dispatch(booksFetchStart());
     return () =>
       dispatch(
-        addBookModalResetAction(),
+        bookCreateModalResetAction(),
         updateBookModalResetAction(),
         deleteBookModalResetAction()
       );
   }, [dispatch, currentPage]);
 
   const handleCreateBook = (values) => {
-    dispatch(addBookItem(values));
+    dispatch(bookCreate(values));
   };
   const handleUpdateBook = (values) => {
     dispatch(updateBookItem(values));
@@ -147,19 +147,19 @@ export default function BooksPage() {
           pageNumber={currentPage}
         />
       )}
-      {onShow && name === "Create" && (
-        <AddBookModal
+      {open && name === "Create" && (
+        <CreateBookModal
           onSave={handleCreateBook}
           onCancel={handleCreateModalOpenToggle}
         />
       )}
-      {onShow && name === "Update" && (
+      {open && name === "Update" && (
         <UpdateBookModal
           onSave={handleUpdateBook}
           onCancel={handleEditModalClose}
         />
       )}
-      {onShow && name === "Delete" && (
+      {open && name === "Delete" && (
         <DeleteBookModal
           onSave={handleDeleteBook}
           onCancel={handleDeleteModalOpenToggle}

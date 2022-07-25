@@ -77,8 +77,8 @@ export const Pagination = ({
 };
 
 Pagination.propTypes = {
-  paginationHandler: PropTypes.func,
-  dataPerPage: PropTypes.number,
-  count: PropTypes.number,
-  pageNumber: PropTypes.number,
+  paginationHandler: PropTypes.func.isRequired,
+  dataPerPage: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
+  pageNumber: PropTypes.number.isRequired,
 };

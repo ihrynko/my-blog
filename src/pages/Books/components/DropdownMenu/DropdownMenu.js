@@ -21,7 +21,7 @@ export const DropdownMenu = (props) => {
       overlay={<DropdownList {...props} handleMenuClick={handleMenuClick} />}
       onVisibleChange={handleVisibleChange}
       visible={visible}
-      placement="top"
+      placement="right"
       arrow
     >
       <a>

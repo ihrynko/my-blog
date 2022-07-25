@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const deleteBookStateSelector = (state) => state.deleteBook;
+const deleteBookStateSelector = (state) => state.bookList.deleteBook;
 
 export const deleteBookLoadingSelector = createSelector(
   deleteBookStateSelector,

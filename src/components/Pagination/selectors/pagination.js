@@ -15,11 +15,11 @@ export const paginationItemsPerPageSelector = createSelector(
 
 export const booksCurrentBooksSelector = createSelector(
   stateSelector,
-  ({ pagination, books }) => {
+  ({ pagination, bookList }) => {
     const { itemsPerPage, currentPage } = pagination;
     const indexOfLastBook = itemsPerPage * currentPage;
     const indexOfFirstBook = indexOfLastBook - itemsPerPage;
 
-    return books.data.slice(indexOfFirstBook, indexOfLastBook);
+    return bookList.books.data.slice(indexOfFirstBook, indexOfLastBook);
   }
 );

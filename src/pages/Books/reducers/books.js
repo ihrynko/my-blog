@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { booksFetchInStart } from "../thunks/books";
+import { booksFetchStart } from "../thunks/books";
 
 const BOOKS = "BOOKS";
 
@@ -15,15 +15,15 @@ const booksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(booksFetchInStart.pending, (state) => {
+      .addCase(booksFetchStart.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(booksFetchInStart.fulfilled, (state, action) => {
+      .addCase(booksFetchStart.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(booksFetchInStart.rejected, (state) => {
+      .addCase(booksFetchStart.rejected, (state) => {
         state.loading = false;
         state.error = true;
       });

@@ -1,4 +1,4 @@
 export const modalOpenToggle = (state, action) => {
-  state.onShow = !state.onShow;
+  state.open = !state.open;
   state.name = action.payload?.name;
 };

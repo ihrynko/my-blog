@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { addBookLoadingSelector } from "../../selectors/addBook";
+import { bookCreateLoadingSelector } from "../../selectors/createBook";
 import { Modal } from "../../../../components/Modal/Modal";
 import { Form } from "../Form/Form";
 import { Loader } from "../../../../components/Loader/Loader";
 
-export const AddBookModal = ({ onSave, onCancel }) => {
-  const loading = useSelector(addBookLoadingSelector);
+export const CreateBookModal = ({ onSave, onCancel }) => {
+  const loading = useSelector(bookCreateLoadingSelector);
   return (
     <Modal
       form="create"
@@ -20,7 +20,7 @@ export const AddBookModal = ({ onSave, onCancel }) => {
   );
 };
 
-AddBookModal.propTypes = {
-  onSave: PropTypes.func,
-  onCancel: PropTypes.func,
+CreateBookModal.propTypes = {
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };

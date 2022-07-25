@@ -42,6 +42,6 @@ export const DeleteBookModal = ({ onSave, onCancel }) => {
 };
 
 DeleteBookModal.propTypes = {
-  onSave: PropTypes.func,
-  onCancel: PropTypes.func,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };

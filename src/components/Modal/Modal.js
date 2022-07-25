@@ -33,14 +33,10 @@ export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
   );
 };
 
-Modal.defaultProps = {
-  onSave: () => {},
-};
-
 Modal.propTypes = {
-  children: PropTypes.node,
-  onCancel: PropTypes.func,
-  loading: PropTypes.bool,
-  formName: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  formName: PropTypes.string.isRequired,
   onSave: PropTypes.func,
 };

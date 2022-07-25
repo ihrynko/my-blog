@@ -9,7 +9,7 @@ export const DropdownList = ({ data, onEdit, onDelete, handleMenuClick }) => {
   return (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="1" icon={<ReadOutlined />}>
-        <Link to={`/books/${id}`}>Open</Link>
+        <Link to={`/books/${id}`}>Read More</Link>
       </Menu.Item>
       <Menu.Item key="2" icon={<EditOutlined />} onClick={() => onEdit(id)}>
         <span>Edit</span>
@@ -27,7 +27,7 @@ export const DropdownList = ({ data, onEdit, onDelete, handleMenuClick }) => {
 
 DropdownList.propTypes = {
   data: PropTypes.object,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
-  handleMenuClick: PropTypes.func,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  handleMenuClick: PropTypes.func.isRequired,
 };
