@@ -12,6 +12,22 @@ import { Form } from "../Form/Form";
 import { Loader } from "../../../../components/Loader/Loader";
 import { Typography } from "antd";
 
+/**
+ * The UpdateBookModal properties.
+ *
+ * @typedef {object} Props
+ * @property {function} onSave - Function for editing a book.
+ * @property {function} onCancel - Function to cancel editing a book.
+ *
+ */
+
+/**
+ * The UpdateBookModal component.
+ *
+ * @type {React.FC<Props>}
+ * @returns {React.ReactElement}
+ */
+
 export const UpdateBookModal = ({ onSave, onCancel }) => {
   const dispatch = useDispatch();
   const fetchData = useSelector(editBookFetchDataSelector);

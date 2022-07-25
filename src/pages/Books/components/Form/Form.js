@@ -22,6 +22,31 @@ const schema = yup.object({
     .required("This field is required"),
 });
 
+/**
+ * The Form properties.
+ *
+ * @typedef {object} Props
+ * @property {object}  data - Data of one book
+ * @property {string}  data._id - Book's id
+ * @property {string}  data.title - Book's title
+ * @property {string}  data.description - Book's description
+ * @property {number}  data.pageCount - Book's pages
+ * @property {string}  data.date - Book's publish date
+ * @property {string}  data.createdAt - Book's creating date
+ * @property {string}  data.updatedAt - Book's updating date
+ * @property {function} onSave - Function to submit data.
+ * @property {string} mode - Mode of form.
+ * @property {string} name - Name of form.
+ *
+ */
+
+/**
+ * The Form component.
+ *
+ * @type {React.FC<Props>}
+ * @returns {React.ReactElement}
+ */
+
 export const Form = ({ mode, data, name, onSave }) => {
   const { Title } = Typography;
   const {

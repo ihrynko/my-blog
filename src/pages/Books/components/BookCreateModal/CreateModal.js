@@ -4,6 +4,22 @@ import { bookCreateLoadingSelector } from "../../selectors/createBook";
 import { Modal } from "../../../../components/Modal/Modal";
 import { Form } from "../Form/Form";
 
+/**
+ * The CreateBookModal properties.
+ *
+ * @typedef {object} Props
+ * @property {function} onSave - Function for adding a book.
+ * @property {function} onCancel - Function to cancel adding a book.
+ *
+ */
+
+/**
+ * The CreateBookModal component.
+ *
+ * @type {React.FC<Props>}
+ * @returns {React.ReactElement}
+ */
+
 export const CreateBookModal = ({ onSave, onCancel }) => {
   const loading = useSelector(bookCreateLoadingSelector);
   return (

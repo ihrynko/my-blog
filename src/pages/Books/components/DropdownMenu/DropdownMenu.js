@@ -3,6 +3,21 @@ import { Dropdown } from "antd";
 import { DropdownList } from "./DropdownList";
 import { StyledMoreIcon } from "./styled";
 
+/**
+ * The DropdownMenu properties.
+ *
+ * @typedef {object} Props
+ *
+ */
+
+/**
+ * The DropdownMenu component.
+ *
+ * @type {React.FC<Props>}
+ * @returns {React.ReactElement}
+ */
+
+
 export const DropdownMenu = (props) => {
   const [visible, setVisible] = useState(false);
 

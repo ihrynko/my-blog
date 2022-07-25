@@ -8,6 +8,22 @@ import { Modal } from "../../../../components/Modal/Modal";
 import { Loader } from "../../../../components/Loader/Loader";
 import { Space, Typography } from "antd";
 
+/**
+ * The DeleteBookModal properties.
+ *
+ * @typedef {object} Props
+ * @property {function} onSave - Function for removing a book.
+ * @property {function} onCancel - Function to cancel removing a book.
+ *
+ */
+
+/**
+ * The DeleteBookModal component.
+ *
+ * @type {React.FC<Props>}
+ * @returns {React.ReactElement}
+ */
+
 export const DeleteBookModal = ({ onSave, onCancel }) => {
   const loading = useSelector(deleteBookLoadingSelector);
   const data = useSelector(deleteBookDataSelector);

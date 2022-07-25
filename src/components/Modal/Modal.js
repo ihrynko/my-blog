@@ -2,6 +2,24 @@ import PropTypes from "prop-types";
 import { Modal as AntdModal } from "antd";
 import { StyledConfirmButton, StyledCancelButton } from "./styled";
 
+/**
+ * The modal properties.
+ *
+ * @typedef {object} Props
+ * @property {React.ReactNode} children - Children for modal.
+ * @property {function} onCancel - Close the modal.
+ * @property {string} formName - The name of form.
+ * @property {bool} loading - The loading of modal.
+ * @property {function=} onSave - Save the data.
+ *
+ */
+
+/**
+ * The modal component.
+ *
+ * @type {React.FC<Props>}
+ * @returns {React.ReactElement}
+ */
 export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
   const footer = [
     <StyledCancelButton key="cancel" loading={loading} onClick={onCancel}>

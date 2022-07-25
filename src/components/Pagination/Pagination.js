@@ -7,6 +7,24 @@ import {
   StyledIcon,
 } from "./styled";
 
+/**
+ * The Pagination properties.
+ *
+ * @typedef {object} Props
+ * @property {function} paginationHandler - Function for handle pagination.
+ * @property {number} dataPerPage - Amount of items per page.
+ * @property {number} count - Amount of items.
+ * @property {number} pageNumber - Number og the page.
+ *
+ */
+
+/**
+ * The Pagination component.
+ *
+ * @type {React.FC<Props>}
+ * @returns {React.ReactElement}
+ */
+
 export const Pagination = ({
   paginationHandler,
   dataPerPage,
