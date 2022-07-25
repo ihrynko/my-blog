@@ -84,6 +84,7 @@
     "@storybook/testing-library": "^0.0.13",
     "babel-plugin-named-exports-order": "^0.0.2",
     "gh-pages": "^4.0.0",
+    "jsdoc": "^3.6.11",
     "webpack": "^5.74.0"
   }
 }

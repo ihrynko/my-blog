@@ -1,4 +1,3 @@
-// import "antd/dist/antd.css";
 import "antd/dist/antd.min.css";
 import { Modal } from "./Modal";
 
@@ -10,6 +9,6 @@ export default {
 const Template = (args) => <Modal {...args} />;
 
 export const Primary = Template.bind({});
-// export const FirstStory = {
-//   args: {},
-// };
+export const FirstStory = {
+  args: {},
+};
