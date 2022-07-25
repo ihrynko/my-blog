@@ -26,7 +26,15 @@ export const DropdownList = ({ data, onEdit, onDelete, handleMenuClick }) => {
 };
 
 DropdownList.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    _id: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    pageCount: PropTypes.number,
+    date: PropTypes.string,
+    createdAt: PropTypes.string,
+    updatedAt: PropTypes.string,
+  }),
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   handleMenuClick: PropTypes.func.isRequired,

@@ -80,10 +80,21 @@ export const Form = ({ mode, data, name, onSave }) => {
     </>
   );
 };
+Form.defaultProps = {
+  onSave: () => {},
+};
 
 Form.propTypes = {
-  mode: PropTypes.string,
-  data: PropTypes.object,
-  name: PropTypes.string,
-  onSave: PropTypes.func,
+  mode: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    _id: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    pageCount: PropTypes.number,
+    date: PropTypes.instanceOf(Date),
+    createdAt: PropTypes.string,
+    updatedAt: PropTypes.string,
+  }),
+  name: PropTypes.string.isRequired,
+  onSave: PropTypes.func.isRequired,
 };

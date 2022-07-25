@@ -3,6 +3,7 @@ import { initialState } from "../reducers/updateBook";
 export const bookUpdateItemIdSet = (state, action) => {
   state.fetchData = action.payload;
 };
+
 export const bookUpdateInProgress = (state) => {
   state.loading = true;
   state.error = false;

@@ -4,7 +4,7 @@ import { StyledConfirmButton, StyledCancelButton } from "./styled";
 
 export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
   const footer = [
-    <StyledCancelButton key="cancel" onClick={onCancel}>
+    <StyledCancelButton key="cancel" loading={loading} onClick={onCancel}>
       Cancel
     </StyledCancelButton>,
     <StyledConfirmButton
@@ -31,6 +31,11 @@ export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
       {children}
     </AntdModal>
   );
+};
+
+Modal.defaultProps = {
+  onSave: () => {},
+  onCancel: () => {},
 };
 
 Modal.propTypes = {

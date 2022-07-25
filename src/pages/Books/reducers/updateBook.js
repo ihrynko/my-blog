@@ -21,10 +21,10 @@ const updateBookSlice = createSlice({
   name: UPDATE_BOOK,
   initialState,
   reducers: {
+    bookUpdateItemIdSet,
     bookUpdateInProgress,
     bookUpdateSuccess,
     bookUpdateError,
-    bookUpdateItemIdSet,
     updateBookModalReset,
   },
   extraReducers: (builder) => {
