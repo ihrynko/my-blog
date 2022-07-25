@@ -6,6 +6,7 @@ import {
   bookCreateInProgressAction,
   bookCreateSuccessAction,
   bookCreateErrorAction,
+  bookCreateModalResetAction,
 } from "../reducers/createBook";
 import { modalOpenToggleAction } from "../../../store/modal/reducers/modal";
 
@@ -19,6 +20,7 @@ export const bookCreate = createAsyncThunk(
       await createBook(data);
       dispatch(bookCreateSuccessAction());
       dispatch(modalOpenToggleAction());
+      dispatch(bookCreateModalResetAction());
       await dispatch(booksFetchStart());
       toast.success("Book is created!");
     } catch (error) {

@@ -6,6 +6,7 @@ import {
   bookUpdateInProgressAction,
   bookUpdateSuccessAction,
   bookUpdateErrorAction,
+  updateBookModalResetAction,
 } from "../reducers/updateBook";
 
 import { modalOpenToggleAction } from "../../../store/modal/reducers/modal";
@@ -32,6 +33,7 @@ export const updateBookItem = createAsyncThunk(
       await updateBook(data, data.id);
       dispatch(bookUpdateSuccessAction());
       dispatch(modalOpenToggleAction());
+      dispatch(updateBookModalResetAction());
       await dispatch(booksFetchStart());
       toast.success("Book is updated!");
     } catch (error) {

@@ -8,7 +8,7 @@ export const bookUpdateInProgress = (state) => {
   state.loading = true;
   state.error = false;
 };
-export const bookUpdateSuccess = (state) => {
+export const bookUpdateSuccess = (state, action) => {
   state.loading = false;
 };
 export const bookUpdateError = (state) => {

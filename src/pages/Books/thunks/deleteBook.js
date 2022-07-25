@@ -6,6 +6,7 @@ import {
   bookDeleteSuccessAction,
   bookDeleteErrorAction,
   bookDeleteInProgressAction,
+  deleteBookModalResetAction,
 } from "../reducers/deleteBook";
 
 import { modalOpenToggleAction } from "../../../store/modal/reducers/modal";
@@ -20,6 +21,7 @@ export const deleteBookItem = createAsyncThunk(
       await deleteBook(data._id);
       dispatch(bookDeleteSuccessAction());
       dispatch(modalOpenToggleAction());
+      dispatch(deleteBookModalResetAction());
       await dispatch(booksFetchStart());
       toast.success("Book is deleted!");
     } catch (error) {

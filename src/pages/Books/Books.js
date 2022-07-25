@@ -8,15 +8,9 @@ import { updateBookItem } from "./thunks/updateBook";
 import { deleteBookItem } from "./thunks/deleteBook";
 
 import { paginationChangePage } from "../../components/Pagination/reducer/pagination";
-import { bookCreateModalResetAction } from "./reducers/createBook";
-import {
-  bookUpdateItemIdSetAction,
-  updateBookModalResetAction,
-} from "./reducers/updateBook";
-import {
-  bookDeleteItemDataSetAction,
-  deleteBookModalResetAction,
-} from "./reducers/deleteBook";
+
+import { bookUpdateItemIdSetAction } from "./reducers/updateBook";
+import { bookDeleteItemDataSetAction } from "./reducers/deleteBook";
 import { modalOpenToggleAction } from "../../store/modal/reducers/modal";
 
 import {
@@ -59,13 +53,7 @@ export default function BooksPage() {
 
   useEffect(() => {
     dispatch(booksFetchStart());
-    return () =>
-      dispatch(
-        bookCreateModalResetAction(),
-        updateBookModalResetAction(),
-        deleteBookModalResetAction()
-      );
-  }, [dispatch, currentPage]);
+  }, [dispatch]);
 
   const handleCreateBook = (values) => {
     dispatch(bookCreate(values));
