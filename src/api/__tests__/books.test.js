@@ -1,5 +1,11 @@
 import client from "../client";
-import { getBooks, getBookItem, createBook, deleteBook } from "../books";
+import {
+  getBooks,
+  getBookItem,
+  createBook,
+  deleteBook,
+  updateBook,
+} from "../books";
 
 jest.mock("axios", () => {
   return {
@@ -7,6 +13,7 @@ jest.mock("axios", () => {
       get: jest.fn(),
       post: jest.fn(),
       delete: jest.fn(),
+      patch: jest.fn(),
       interceptors: {
         request: { use: jest.fn(), eject: jest.fn() },
         response: { use: jest.fn(), eject: jest.fn() },
@@ -98,6 +105,20 @@ describe("mock api calls", () => {
     jest.spyOn(client, "delete").mockResolvedValue(mockedResponse);
     const result = await deleteBook({ bookId: mockedResponse._id });
     expect(client.delete).toHaveBeenCalledTimes(1);
+    expect(result).toEqual(mockedResponse);
+  });
+  it("should update a book", async () => {
+    const mockedResponse = {
+      title: "Et doloribus officiis voluptatem sint.",
+      description: "Book 2",
+      pageCount: 126,
+    };
+    jest.spyOn(client, "patch").mockResolvedValue(mockedResponse);
+    const result = await updateBook({
+      bookId: "62d47950fb286c7e14497c01",
+      data: mockedResponse,
+    });
+    expect(client.patch).toHaveBeenCalledTimes(1);
     expect(result).toEqual(mockedResponse);
   });
 });
