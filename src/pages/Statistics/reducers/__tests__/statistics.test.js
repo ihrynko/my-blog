@@ -9,7 +9,7 @@ describe("mock statistics reducer", () => {
   };
 
   it("should return the initial state", () => {
-    expect(books(undefined, { type: undefined })).toEqual(initialState);
+    expect(statistics(undefined, { type: undefined })).toEqual(initialState);
   });
   it("should set loading true while books are pending", () => {
     const action = { type: statisticsFetchStart.pending };
