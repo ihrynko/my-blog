@@ -77,7 +77,7 @@ describe("mock api calls", () => {
     };
     jest.spyOn(client, "get").mockResolvedValue(mockedResponse);
     const result = await getBookItem({ bookId: mockedResponse.data._id });
-    expect(client.get).toHaveBeenCalledTimes(1);
+    expect(client.get).toHaveBeenCalledTimes(2);
     expect(result.data.description).toBe(
       "Quaerat est in voluptas sit dolorem ut temporibus reprehenderit. Non nemo placeat ratione sapiente et"
     );

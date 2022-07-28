@@ -6,7 +6,7 @@ import { statistics } from "../../pages/Statistics/reducers/statistics";
 import { createBook } from "../../pages/Books/reducers/createBook";
 import { deleteBook } from "../../pages/Books/reducers/deleteBook";
 import { updateBook } from "../../pages/Books/reducers/updateBook";
-import { pagination } from "../../components/Pagination/reducer/pagination";
+import { pagination } from "../pagination/reducer/pagination";
 import { modal } from "../modal/reducers/modal";
 
 const bookList = combineReducers({

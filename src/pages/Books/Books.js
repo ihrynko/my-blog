@@ -7,7 +7,7 @@ import { bookCreate } from "./thunks/createBook";
 import { updateBookItem } from "./thunks/updateBook";
 import { deleteBookItem } from "./thunks/deleteBook";
 
-import { paginationChangePage } from "../../components/Pagination/reducer/pagination";
+import { paginationChangePage } from "../../store/pagination/reducer/pagination";
 
 import { bookUpdateItemIdSetAction } from "./reducers/updateBook";
 import { bookDeleteItemDataSetAction } from "./reducers/deleteBook";
@@ -17,7 +17,7 @@ import {
   paginationCurrentPageSelector,
   paginationItemsPerPageSelector,
   booksCurrentBooksSelector,
-} from "../../components/Pagination/selectors/pagination";
+} from "../../store/pagination/selectors/pagination";
 import { modalStateSelector } from "../../store/modal/selectors/modal";
 
 import { CreateBookModal } from "./components/BookCreateModal/CreateModal";
