@@ -1,3 +1,4 @@
+import React from "react";
 import moment from "moment";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -35,7 +36,7 @@ export default function BookItemPage() {
             Back
           </StyledButton>
           <StyledContainer>
-            <StyledTitle>{book.title}</StyledTitle>
+            <StyledTitle data-testid="book-title">{book.title}</StyledTitle>
             <StyledInfo>
               <StyledSubtitle>Description</StyledSubtitle>
               <p>{book.description}</p>
