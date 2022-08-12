@@ -8,6 +8,10 @@ export const getBooks = async () => {
   }
 };
 
+// export const getAllBooks = () => {
+//   return client.get < never, Book[] > "/books";
+// };
+
 export const getBookItem = async (bookId) => {
   try {
     return await client.get(`/books/${bookId}`);
